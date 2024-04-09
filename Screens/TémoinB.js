@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 
-const Témoin = () => {
+const TémoinB = () => {
   const navigation = useNavigation();
   return (
     <Screen>
@@ -48,11 +48,11 @@ const Témoin = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoixVehicule")}
+          onPress={() => navigation.navigate("ChoixVehiculeB")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoixVehiculeB")}
+          onPress={() => navigation.navigate("InfoAssuranceA")}
         />
       </View>
     </Screen>
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Témoin;
+export default TémoinB;

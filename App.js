@@ -7,7 +7,9 @@ import Info from "./Screens/Info";
 import AjoutVéhicule from "./Screens/AjoutVéhicule";
 import Consigne from "./Screens/Consigne";
 import ModeSaisie from "./Screens/ModeSaisie";
-import ChoixVehicule from "./Screens/ChoixVehicule";
+import ChoixVehiculeA from "./Screens/ChoixVehiculeA";
+import ChoixVehiculeB from "./Screens/ChoixVehiculeB";
+import TémoinB from "./Screens/TémoinB";
 import Témoin from "./Screens/Témoin";
 import AjoutTémoin from "./Screens/AjoutTémoin";
 import InfoAssuranceA from "./Screens/InfoAssuranceA";
@@ -29,7 +31,6 @@ import ObservationA from "./Screens/ObservationA";
 import ObservationB from "./Screens/ObservationB";
 import SignatureA from "./Screens/SignatureA";
 import SignatureB from "./Screens/SignatureB";
-import Test from "./Screens/Test";
 //#151B26
 
 const Stack = createNativeStackNavigator();
@@ -69,8 +70,18 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ChoixVehicule"
-          component={ChoixVehicule}
+          name="ChoixVehiculeA"
+          component={ChoixVehiculeA}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChoixVehiculeB"
+          component={ChoixVehiculeB}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TémoinB"
+          component={TémoinB}
           options={{ headerShown: false }}
         />
         <Stack.Screen

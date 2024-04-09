@@ -41,7 +41,7 @@ const ModeSaisie = () => {
   const generateRandomCode = () => {
     let code = "";
     for (let i = 0; i < 5; i++) {
-      code += Math.floor(Math.random() * 10); // Generate a random digit from 0 to 9
+      code += Math.floor(Math.random() * 10); 
     }
     setCode(code);
   };
@@ -136,7 +136,7 @@ const ModeSaisie = () => {
         <DynamicHeader screen="Consigne" num={1} />
         <Title text="Choisir le mode de Saisie :" />
         <View style={{ alignItems: "center" }}>
-          <Pressable onPress={() => navigation.navigate("ChoixVehicule")}>
+          <Pressable onPress={() => navigation.navigate("ChoixVehiculeA")}>
             <View
               style={{
                 marginTop: 30,
