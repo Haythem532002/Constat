@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, Pressable, Image } from "react-native";
 import Screen from "./Screen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
+      const { type, assurance, immatriculation, numContrat } = useSelector(
+        (state) => state.vehicule
+      );
+      console.log("From App " + type);
   const navigation = useNavigation();
   return (
     <Screen>

@@ -7,7 +7,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../Components/Title";
 
-const Croquis = ({ text, checked, w, h,desc }) => {
+const Croquis = ({ text, checked, w, h, desc }) => {
   const colorBack = () => {
     const obj = {};
     if (checked) {
@@ -32,7 +32,7 @@ const Croquis = ({ text, checked, w, h,desc }) => {
         <Image source={text} style={styles.image} />
       </View>
       <Text style={{ color: "#ffffff", fontSize: 18, textAlign: "center" }}>
-       {desc}
+        {desc}
       </Text>
     </View>
   );
@@ -109,11 +109,19 @@ const ChoixCroquis = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ModeSaisie")}
+          onPress={() => navigation.navigate("Accident")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("PhotoCroquis")}
+          onPress={() => {
+            if (croquis === "croquis") {
+              return navigation.navigate("Croquis");
+            } else if (croquis === "photo") {
+              return navigation.navigate("PhotoCroquis");
+            } else if (croquis === "nonCroquis") {
+              return navigation.navigate("InfoSupp");
+            }
+          }}
         />
       </View>
     </Screen>

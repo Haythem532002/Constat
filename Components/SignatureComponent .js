@@ -1,76 +1,60 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
-import Canvas from "./Canvas";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import Signature from "react-native-signature-canvas";
+
 const SignatureComponent = () => {
-  const [path, setPath] = useState([]);
-  const canvasRef = useRef(null);
+  const [signature, setSign] = useState(null);
 
-  const handleTouchStart = ({ nativeEvent }) => {
-    const { locationX, locationY } = nativeEvent;
-    setPath([{ x: locationX, y: locationY }]);
+  const handleOK = (signature) => {
+    setSign(signature);
   };
 
-  const handleTouchMove = ({ nativeEvent }) => {
-    const { locationX, locationY } = nativeEvent;
-    setPath((prevPath) => [...prevPath, { x: locationX, y: locationY }]);
+  const handleEmpty = () => {
+    console.log("Empty");
   };
 
-  const handleClear = () => {
-    setPath([]);
-    const context = canvasRef.current.getContext("2d");
-    context.clearRect(
-      0,
-      0,
-      Dimensions.get("window").width,
-      Dimensions.get("window").height
-    );
-  };
-
+  const style = `.m-signature-pad--footer
+    .button {
+      background-color: red;
+      color: #FFF;
+    }`;
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
-        <Text>Clear</Text>
-      </TouchableOpacity>
-      <View style={styles.canvasContainer}>
-        <View style={styles.canvasBorder}>
-          {/* Render the canvas element directly */}
-          <Canvas
-            ref={canvasRef}
-            style={styles.canvas}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-          />
-        </View>
+    <View>
+      <View style={{ width: 370, height: 350 }}>
+        <Signature
+          onOK={handleOK}
+          onEmpty={handleEmpty}
+          descriptionText="Sign"
+          clearText="Clear"
+          confirmText="Save"
+          webStyle={style}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
+  preview: {
+    width: 335,
+    height: 300,
+    backgroundColor: "#F8F8F8",
     justifyContent: "center",
-  },
-  clearButton: {
-    position: "absolute",
-    top: 20,
-    right: 20,
-    zIndex: 1,
-  },
-  canvasContainer: {
+    alignItems: "center",
+    marginTop: 15,
     borderWidth: 1,
-    borderColor: "black",
   },
-  canvas: {
-    width: 300,
-    height: 150,
+  previewText: {
+    color: "#FFF",
+    fontSize: 14,
+    height: 40,
+    lineHeight: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#69B2FF",
+    width: 120,
+    textAlign: "center",
+    marginTop: 10,
   },
 });
 

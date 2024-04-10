@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import Screen from "./Screen";
 import Title from "../Components/Title";
@@ -10,13 +10,25 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setType,
+  setAssurance,
+  setImmatriculation,
+  setNumContrat,
+  resetState,
+} from "../reducers/vehiculeReducer";
 const AjoutVéhicule = () => {
+  useEffect(() => {
+    return () => {
+      dispatch(resetState());
+    };
+  }, []);
   const navigation = useNavigation();
-  const [assurance, setAssurance] = useState("");
-  const [immatriculation, setImmatriculation] = useState("");
-  const [numContrat, setNumContrat] = useState("");
-  const [vehicule, setVehicule] = useState("");
+  const dispatch = useDispatch();
+  const { type, assurance, immatriculation, numContrat } = useSelector(
+    (state) => state.vehicule
+  );
   const [checked, setChecked] = useState({
     car: false,
     bike: false,
@@ -24,7 +36,7 @@ const AjoutVéhicule = () => {
   });
 
   const validate = () => {
-    if (!assurance || !immatriculation || !numContrat || !vehicule) {
+    if (!assurance || !immatriculation || !numContrat || !type) {
       Alert.alert(
         "Erreur lors de l'ajout",
         "Tous les champs sont obligatoires pour ajouter une véhicule",
@@ -45,7 +57,7 @@ const AjoutVéhicule = () => {
         <ScrollView horizontal={true}>
           <Pressable
             onPress={() => {
-              setVehicule("Car");
+              dispatch(setType("Car"));
               setChecked({
                 car: true,
                 bike: false,
@@ -62,7 +74,7 @@ const AjoutVéhicule = () => {
           </Pressable>
           <Pressable
             onPress={() => {
-              setVehicule("MotorBike");
+              dispatch(setType("MotorBike"));
               setChecked({
                 car: false,
                 bike: true,
@@ -79,7 +91,7 @@ const AjoutVéhicule = () => {
           </Pressable>
           <Pressable
             onPress={() => {
-              setVehicule("Truck");
+              dispatch(setType("Truck"));
               setChecked({
                 car: false,
                 bike: false,
@@ -99,11 +111,20 @@ const AjoutVéhicule = () => {
           Saisissez les informations du véhicule :{" "}
         </Text>
         <Label text="Assurance" />
-        <Input value={assurance} onChangeText={setAssurance} />
+        <Input
+          value={assurance}
+          onChangeText={(text) => dispatch(setAssurance(text))}
+        />
         <Label text="Immatriculation" />
-        <Input value={immatriculation} onChangeText={setImmatriculation} />
+        <Input
+          value={immatriculation}
+          onChangeText={(text) => dispatch(setImmatriculation(text))}
+        />
         <Label text="Numéro de contrat" />
-        <Input value={numContrat} onChangeText={setNumContrat} />
+        <Input
+          value={numContrat}
+          onChangeText={(text) => dispatch(setNumContrat(text))}
+        />
       </View>
       <View style={styles.buttonContainer}>
         <ButtonBlanc

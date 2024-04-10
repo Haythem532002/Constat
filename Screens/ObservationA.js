@@ -39,7 +39,7 @@ const ObservationA = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoixCroquis")}
+          onPress={() => navigation.navigate("InfoSupp")}
         />
         <ButtonRouge
           title="Suivant"

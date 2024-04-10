@@ -31,165 +31,175 @@ import ObservationA from "./Screens/ObservationA";
 import ObservationB from "./Screens/ObservationB";
 import SignatureA from "./Screens/SignatureA";
 import SignatureB from "./Screens/SignatureB";
+import Croquis from "./Screens/Croquis";
 //#151B26
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Menu"
-          component={Menu}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Info"
-          component={Info}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AjoutVéhicule"
-          component={AjoutVéhicule}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Consigne"
-          component={Consigne}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ModeSaisie"
-          component={ModeSaisie}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoixVehiculeA"
-          component={ChoixVehiculeA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoixVehiculeB"
-          component={ChoixVehiculeB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="TémoinB"
-          component={TémoinB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Témoin"
-          component={Témoin}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AjoutTémoin"
-          component={AjoutTémoin}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InfoAssuranceA"
-          component={InfoAssuranceA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InfoAssuranceB"
-          component={InfoAssuranceB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InfoAssurance"
-          component={InfoAssurance}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ContratA"
-          component={ContratA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ContratB"
-          component={ContratB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Contrat"
-          component={Contrat}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoqA"
-          component={ChoqA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoqArecap"
-          component={ChoqArecap}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoqB"
-          component={ChoqB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoqBrecap"
-          component={ChoqBrecap}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Circonstance"
-          component={Circonstance}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Accident"
-          component={Accident}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChoixCroquis"
-          component={ChoixCroquis}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PhotoCroquis"
-          component={PhotoCroquis}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InfoSupp"
-          component={InfoSupp}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ObservationA"
-          component={ObservationA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ObservationB"
-          component={ObservationB}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignatureA"
-          component={SignatureA}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignatureB"
-          component={SignatureB}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Menu"
+            component={Menu}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Info"
+            component={Info}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AjoutVéhicule"
+            component={AjoutVéhicule}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Consigne"
+            component={Consigne}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ModeSaisie"
+            component={ModeSaisie}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoixVehiculeA"
+            component={ChoixVehiculeA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoixVehiculeB"
+            component={ChoixVehiculeB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TémoinB"
+            component={TémoinB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Témoin"
+            component={Témoin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AjoutTémoin"
+            component={AjoutTémoin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoAssuranceA"
+            component={InfoAssuranceA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoAssuranceB"
+            component={InfoAssuranceB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoAssurance"
+            component={InfoAssurance}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ContratA"
+            component={ContratA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ContratB"
+            component={ContratB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Contrat"
+            component={Contrat}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoqA"
+            component={ChoqA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoqArecap"
+            component={ChoqArecap}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoqB"
+            component={ChoqB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoqBrecap"
+            component={ChoqBrecap}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Circonstance"
+            component={Circonstance}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Accident"
+            component={Accident}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoixCroquis"
+            component={ChoixCroquis}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PhotoCroquis"
+            component={PhotoCroquis}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoSupp"
+            component={InfoSupp}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ObservationA"
+            component={ObservationA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ObservationB"
+            component={ObservationB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignatureA"
+            component={SignatureA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignatureB"
+            component={SignatureB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Croquis"
+            component={Croquis}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
