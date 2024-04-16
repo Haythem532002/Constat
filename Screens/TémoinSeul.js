@@ -8,11 +8,11 @@ import { useNavigation } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 
-const Témoin = () => {
+const TémoinSeul = () => {
   const navigation = useNavigation();
   return (
     <Screen>
-      <Nav screen="ChoixVehiculeA" />
+      <Nav screen="ChoixVéhiculeSeul" />
       <Title text="Ajout des témoins (optionnel)" />
       <Text style={styles.textColor}>
         Vous pouvez ajouter jusqu'à 4 témoins pour completer votre e-constat
@@ -31,7 +31,7 @@ const Témoin = () => {
           </Pressable>
         </View>
       </View>
-      <Pressable onPress={() => navigation.navigate("AjoutTémoinA")}>
+      <Pressable onPress={() => navigation.navigate("AjoutTémoin")}>
         <View
           style={{
             flexDirection: "row",
@@ -59,11 +59,11 @@ const Témoin = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoixVehiculeA")}
+          onPress={() => navigation.navigate("ChoixVéhiculeSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoixVehiculeB")}
+          onPress={() => navigation.navigate("InfoAssuranceSeul")}
         />
       </View>
     </Screen>
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Témoin;
+export default TémoinSeul;

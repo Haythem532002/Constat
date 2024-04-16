@@ -4,8 +4,8 @@ import IconA from "react-native-vector-icons/AntDesign";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 
-const Nav = ({screen}) => {
-    const navigation=useNavigation();
+const Nav = ({ screen }) => {
+  const navigation = useNavigation();
   return (
     <View>
       <View style={styles.container}>
@@ -20,7 +20,7 @@ const Nav = ({screen}) => {
           <Image source={require("../assets/Logo.png")} style={styles.image} />
           <Text style={styles.textColor}>E-constat</Text>
         </View>
-        <Pressable onPress={()=>navigation.navigate("Menu")}>
+        <Pressable onPress={() => navigation.navigate("Menu")}>
           <Icon name="bars" size={30} color="#ffffff" />
         </Pressable>
       </View>

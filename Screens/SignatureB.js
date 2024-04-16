@@ -28,7 +28,7 @@ const SignatureB = () => {
     }`;
   return (
     <Screen>
-      <DynamicHeader screen="InfoSupp" num={5} />
+      <DynamicHeader screen="SignatureA" num={5} />
       <Title text="Signature" />
       <VehiculeIndication letter="B" />
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>

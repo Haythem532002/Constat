@@ -10,7 +10,7 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 
-const ContratA = () => {
+const ContratSeul = () => {
   const navigation = useNavigation();
 
   const [numeroContrat, setNumeroContrat] = useState("");
@@ -27,9 +27,8 @@ const ContratA = () => {
 
   return (
     <Screen>
-      <DynamicHeader num={2} screen="InfoAssurance" />
+      <DynamicHeader num={2} screen="InfoAssuranceSeul" />
       <Title text="Contrats et Conducteurs" />
-      <VehiculeIndication letter="A" />
       <Label text="Numéro de contrat" />
       <Input value={numeroContrat} onChangeText={setNumeroContrat} />
       <Label text="Nom de l'assuré ou raison sociale" />
@@ -64,11 +63,11 @@ const ContratA = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("InfoAssurance")}
+          onPress={() => navigation.navigate("InfoAssuranceSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ContratB")}
+          onPress={() => navigation.navigate("ChoqSeul")}
         />
       </View>
     </Screen>
@@ -85,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ContratA;
+export default ContratSeul;

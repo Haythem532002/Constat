@@ -8,19 +8,30 @@ import { useNavigation } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 
-const TémoinB = () => {
+const Témoin = () => {
   const navigation = useNavigation();
   return (
     <Screen>
-      <Nav screen="ChoixVehicule" />
+      <Nav screen="ChoixVehiculeB" />
       <Title text="Ajout des témoins (optionnel)" />
       <Text style={styles.textColor}>
         Vous pouvez ajouter jusqu'à 4 témoins pour completer votre e-constat
       </Text>
-      <Pressable
-        onPress={() => navigation.navigate("AjoutTémoin")}
-        style={{ marginVertical: 50 }}
-      >
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.text}>Témoin 1</Text>
+          <Text style={styles.text}>Haythem Khiari</Text>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Pressable>
+            <Icon name="edit" size={30} color="#ffffff" />
+          </Pressable>
+          <Pressable style={{ marginLeft: 20 }}>
+            <Icon name="trash" size={30} color="#ffffff" />
+          </Pressable>
+        </View>
+      </View>
+      <Pressable onPress={() => navigation.navigate("AjoutTémoinA")}>
         <View
           style={{
             flexDirection: "row",
@@ -52,7 +63,7 @@ const TémoinB = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("InfoAssuranceA")}
+          onPress={() => navigation.navigate("InfoAssurance")}
         />
       </View>
     </Screen>
@@ -61,10 +72,15 @@ const TémoinB = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    marginVertical: 30,
+    flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#2c3e50",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: "#ffffff",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
   textColor: {
     color: "#ddd",
@@ -74,8 +90,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 320,
+    paddingTop: 280,
+    marginBottom: 35,
+  },
+  text: {
+    color: "white",
+    fontSize: 20,
   },
 });
 
-export default TémoinB;
+export default Témoin;

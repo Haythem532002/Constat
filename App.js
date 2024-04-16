@@ -9,29 +9,45 @@ import Consigne from "./Screens/Consigne";
 import ModeSaisie from "./Screens/ModeSaisie";
 import ChoixVehiculeA from "./Screens/ChoixVehiculeA";
 import ChoixVehiculeB from "./Screens/ChoixVehiculeB";
+import ChoixVéhiculeSeul from "./Screens/ChoixVéhiculeSeul";
 import TémoinB from "./Screens/TémoinB";
 import Témoin from "./Screens/Témoin";
+import TémoinSeul from "./Screens/TémoinSeul";
+import AjoutTémoinA from "./Screens/AjoutTémoinA";
+import AjoutTémoinB from "./Screens/AjoutTémoinB";
 import AjoutTémoin from "./Screens/AjoutTémoin";
 import InfoAssuranceA from "./Screens/InfoAssuranceA";
 import InfoAssuranceB from "./Screens/InfoAssuranceB";
+import InfoAssuranceSeul from "./Screens/InfoAssuranceSeul";
 import InfoAssurance from "./Screens/InfoAssurance";
 import ContratA from "./Screens/ContratA";
 import ContratB from "./Screens/ContratB";
 import Contrat from "./Screens/Contrat";
+import ContratSeul from "./Screens/ContratSeul";
 import ChoqA from "./Screens/ChoqA";
 import ChoqArecap from "./Screens/ChoqArecap";
 import ChoqB from "./Screens/ChoqB";
 import ChoqBrecap from "./Screens/ChoqBrecap";
+import ChoqSeul from "./Screens/ChoqSeul";
+import ChoqSeulRecap from "./Screens/ChoqSeulRecap";
 import Circonstance from "./Screens/Circonstance";
+import CirconstanceSeul from "./Screens/CirconstanceSeul";
 import Accident from "./Screens/Accident";
+import AccidentSeul from "./Screens/AccidentSeul";
 import ChoixCroquis from "./Screens/ChoixCroquis";
+import ChoixCroquisSeul from "./Screens/ChoixCroquisSeul";
+import PhotoCroquisSeul from "./Screens/PhotoCroquisSeul";
 import PhotoCroquis from "./Screens/PhotoCroquis";
 import InfoSupp from "./Screens/InfoSupp";
+import InfoSuppSeul from "./Screens/InfoSuppSeul";
 import ObservationA from "./Screens/ObservationA";
 import ObservationB from "./Screens/ObservationB";
+import ObservationSeul from "./Screens/ObservationSeul";
 import SignatureA from "./Screens/SignatureA";
 import SignatureB from "./Screens/SignatureB";
+import SignatureSeul from "./Screens/SignatureSeul";
 import Croquis from "./Screens/Croquis";
+import CroquisSeul from "./Screens/CroquisSeul";
 //#151B26
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -42,7 +58,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="SignatureSeul">
           <Stack.Screen
             name="Home"
             component={Home}
@@ -84,6 +100,11 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="ChoixVéhiculeSeul"
+            component={ChoixVéhiculeSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="TémoinB"
             component={TémoinB}
             options={{ headerShown: false }}
@@ -91,6 +112,21 @@ export default function App() {
           <Stack.Screen
             name="Témoin"
             component={Témoin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TémoinSeul"
+            component={TémoinSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AjoutTémoinA"
+            component={AjoutTémoinA}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AjoutTémoinB"
+            component={AjoutTémoinB}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -114,6 +150,11 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="InfoAssuranceSeul"
+            component={InfoAssuranceSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="ContratA"
             component={ContratA}
             options={{ headerShown: false }}
@@ -121,6 +162,11 @@ export default function App() {
           <Stack.Screen
             name="ContratB"
             component={ContratB}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ContratSeul"
+            component={ContratSeul}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -149,8 +195,23 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="ChoqSeul"
+            component={ChoqSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoqSeulRecap"
+            component={ChoqSeulRecap}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="Circonstance"
             component={Circonstance}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CirconstanceSeul"
+            component={CirconstanceSeul}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -159,8 +220,18 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="AccidentSeul"
+            component={AccidentSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="ChoixCroquis"
             component={ChoixCroquis}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChoixCroquisSeul"
+            component={ChoixCroquisSeul}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -169,8 +240,18 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="PhotoCroquisSeul"
+            component={PhotoCroquisSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="InfoSupp"
             component={InfoSupp}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoSuppSeul"
+            component={InfoSuppSeul}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -184,6 +265,11 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="ObservationSeul"
+            component={ObservationSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="SignatureA"
             component={SignatureA}
             options={{ headerShown: false }}
@@ -194,8 +280,18 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="SignatureSeul"
+            component={SignatureSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="Croquis"
             component={Croquis}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CroquisSeul"
+            component={CroquisSeul}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

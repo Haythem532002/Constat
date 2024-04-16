@@ -27,7 +27,7 @@ const ContratB = () => {
 
   return (
     <Screen>
-      <DynamicHeader num={2} screen="InfoAssurance " />
+      <DynamicHeader num={2} screen="ContratA" />
       <Title text="Contrats et Conducteurs" />
       <VehiculeIndication letter="B" />
       <Label text="Numéro de contrat" />

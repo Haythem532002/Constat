@@ -18,7 +18,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 
-const ChoqA = () => {
+const ChoqSeul = () => {
   const navigation = useNavigation();
   const [squares, setSquares] = useState(Array(12).fill(false));
   const toggleSquare = (index) => {
@@ -51,7 +51,6 @@ const ChoqA = () => {
   return (
     <Screen>
       <DynamicHeader screen="Contrat" num={2} />
-      <VehiculeIndication letter="A" />
       <View
         style={{
           flexDirection: "row",
@@ -326,7 +325,7 @@ const ChoqA = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoqArecap", { squares })}
+          onPress={() => navigation.navigate("ChoqSeulRecap", { squares })}
         />
       </View>
     </Screen>
@@ -395,4 +394,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChoqA;
+export default ChoqSeul;

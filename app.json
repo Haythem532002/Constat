@@ -3,6 +3,14 @@
     "name": "Front-End",
     "slug": "Front-End",
     "version": "1.0.0",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
     "permissions": [
       "CAMERA",
       "READ_EXTERNAL_STORAGE",

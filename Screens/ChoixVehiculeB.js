@@ -17,7 +17,7 @@ const ChoixVehiculeB = () => {
   });
   return (
     <Screen>
-      <DynamicHeader screen="ModeSaisie" num={1} />
+      <DynamicHeader screen="Témoin" num={1} />
       <VehiculeIndication letter="B" />
       <View style={styles.container}>
         <Pressable
@@ -75,7 +75,7 @@ const ChoixVehiculeB = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ModeSaisie")}
+          onPress={() => navigation.navigate("Témoin")}
         />
         <ButtonRouge
           title="Suivant"

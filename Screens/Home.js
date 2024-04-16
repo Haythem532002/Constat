@@ -6,10 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
-      const { type, assurance, immatriculation, numContrat } = useSelector(
-        (state) => state.vehicule
-      );
-      console.log("From App " + type);
+  const { type, assurance, immatriculation, numContrat } = useSelector(
+    (state) => state.vehicule
+  );
   const navigation = useNavigation();
   return (
     <Screen>

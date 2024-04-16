@@ -9,7 +9,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Signature from "react-native-signature-canvas";
 
-const SignatureA = () => {
+const SignatureSeul = () => {
   const navigation = useNavigation();
   const [signature, setSign] = useState(null);
 
@@ -28,9 +28,8 @@ const SignatureA = () => {
     }`;
   return (
     <Screen>
-      <DynamicHeader screen="ObservationB" num={5} />
+      <DynamicHeader screen="ObservationSeul" num={5} />
       <Title text="Signature" />
-      <VehiculeIndication letter="A" />
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Veuillez signer avec le doight :{" "}
       </Text>
@@ -47,7 +46,7 @@ const SignatureA = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ObservationB")}
+          onPress={() => navigation.navigate("ObservationSeul")}
         />
         <ButtonRouge
           title="Suivant"
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 60,
+    paddingTop: 160,
   },
   signatureCapture: {
     width: 300,
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignatureA;
+export default SignatureSeul;

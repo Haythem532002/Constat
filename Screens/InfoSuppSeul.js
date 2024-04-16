@@ -9,7 +9,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 
-const InfoSupp = () => {
+const InfoSuppSeul = () => {
   const navigation = useNavigation();
   const [degat, setDegat] = useState(false);
   const toggleSwitch = () => setDegat((prev) => !prev);
@@ -42,7 +42,7 @@ const InfoSupp = () => {
   };
   return (
     <Screen>
-      <DynamicHeader screen="ChoixCroquis" num={4} />
+      <DynamicHeader screen="ChoixCroquisSeul" num={4} />
       <Title text="Informations Supplémentaires" />
       <Text style={{ color: "#ffffff", fontSize: 18, marginVertical: 20 }}>
         Vous pouvez prendre des photos supplémentaires de l'accident
@@ -86,11 +86,11 @@ const InfoSupp = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoixCroquis")}
+          onPress={() => navigation.navigate("ChoixCroquisSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ObservationA")}
+          onPress={() => navigation.navigate("ObservationSeul")}
         />
       </View>
     </Screen>
@@ -131,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoSupp;
+export default InfoSuppSeul;

@@ -38,7 +38,7 @@ const Croquis = ({ text, checked, w, h, desc }) => {
   );
 };
 
-const ChoixCroquis = () => {
+const ChoixCroquisSeul = () => {
   const navigation = useNavigation();
   const [croquis, setCroquis] = useState("");
   const [checked, setChecked] = useState({
@@ -48,7 +48,7 @@ const ChoixCroquis = () => {
   });
   return (
     <Screen>
-      <DynamicHeader screen="Accident" num={4} />
+      <DynamicHeader screen="AccidentSeul" num={4} />
       <Title text="Choix de Croquis" />
       <View style={styles.container}>
         <Pressable
@@ -109,17 +109,17 @@ const ChoixCroquis = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("Accident")}
+          onPress={() => navigation.navigate("AccidentSeul")}
         />
         <ButtonRouge
           title="Suivant"
           onPress={() => {
             if (croquis === "croquis") {
-              return navigation.navigate("Croquis");
+              return navigation.navigate("CroquisSeul");
             } else if (croquis === "photo") {
-              return navigation.navigate("PhotoCroquis");
+              return navigation.navigate("PhotoCroquisSeul");
             } else if (croquis === "nonCroquis") {
-              return navigation.navigate("InfoSupp");
+              return navigation.navigate("InfoSuppSeul");
             }
           }}
         />
@@ -155,4 +155,4 @@ const styles = StyleSheet.create({
   image: { width: 40, height: 40 },
 });
 
-export default ChoixCroquis;
+export default ChoixCroquisSeul;

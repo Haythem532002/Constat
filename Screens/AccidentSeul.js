@@ -10,7 +10,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
 
-const Accident = () => {
+const AccidentSeul = () => {
   const navigation = useNavigation();
   const [date, setDate] = useState("");
   const [heure, setHeure] = useState("");
@@ -42,7 +42,7 @@ const Accident = () => {
   }
   return (
     <Screen>
-      <DynamicHeader screen="ChoqBrecap" num={3} />
+      <DynamicHeader screen="CirconstanceSeul" num={3} />
       <Title text="Indiquer la date, l'heure et le lieu de l'accident." />
       <Label text="Date" />
       <Input value={date} onChangeText={setDate} />
@@ -61,11 +61,11 @@ const Accident = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoqB")}
+          onPress={() => navigation.navigate("CirconstanceSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoixCroquis")}
+          onPress={() => navigation.navigate("ChoixCroquisSeul")}
         />
       </View>
     </Screen>
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Accident;
+export default AccidentSeul;

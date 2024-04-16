@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Switch, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -9,10 +9,8 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 
-const InfoSupp = () => {
+const PhotoCroquisSeul = () => {
   const navigation = useNavigation();
-  const [degat, setDegat] = useState(false);
-  const toggleSwitch = () => setDegat((prev) => !prev);
 
   const [images, setImages] = useState([]);
   const pickImage = async () => {
@@ -42,10 +40,11 @@ const InfoSupp = () => {
   };
   return (
     <Screen>
-      <DynamicHeader screen="ChoixCroquis" num={4} />
-      <Title text="Informations Supplémentaires" />
+      <DynamicHeader screen="ChoixCroquisSeul" num={4} />
+      <Title text="Photo de croquis de l'accident" />
       <Text style={{ color: "#ffffff", fontSize: 18, marginVertical: 20 }}>
-        Vous pouvez prendre des photos supplémentaires de l'accident
+        Si vous le souhaitez, vous pouvez prendre en photo le croquis de
+        l'accident
       </Text>
       <Pressable onPress={pickImage} style={styles.buttonStyle}>
         <IconF name="photo" size={20} color="#ffffff" />
@@ -54,24 +53,6 @@ const InfoSupp = () => {
       <Pressable onPress={takePhoto} style={styles.buttonStyle}>
         <Text style={styles.text}>Prendre une photo</Text>
       </Pressable>
-      <View
-        style={{
-          alignItems: "center",
-          flexDirection: "row",
-          marginTop: 10,
-          flexWrap: "wrap",
-        }}
-      >
-        <Switch
-          trackColor={{ false: "#767577", true: "#ffffff" }}
-          thumbColor={degat ? "red" : "#f4f3f4"}
-          onValueChange={toggleSwitch}
-          value={degat}
-        />
-        <Text style={{ color: "#ffffff", fontSize: 16 }}>
-          Dégat(s) matériel(s) autre(s) qu'aux véhicule
-        </Text>
-      </View>
       {images.length > 0 && (
         <View style={styles.imageContainer}>
           {images.map((ele) => (
@@ -86,11 +67,11 @@ const InfoSupp = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoixCroquis")}
+          onPress={() => navigation.navigate("ChoixCroquisSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ObservationA")}
+          onPress={() => navigation.navigate("InfoSuppSeul")}
         />
       </View>
     </Screen>
@@ -102,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 260,
+    paddingTop: 310,
     marginBottom: 35,
   },
   imageContainer: {
@@ -131,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoSupp;
+export default PhotoCroquisSeul;

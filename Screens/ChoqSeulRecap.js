@@ -1,69 +1,54 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Image,
   Pressable,
-  Switch,
+  Image,
   TextInput,
 } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import VehiculeIndication from "../Components/VehiculeIndication";
-import Icon from "react-native-vector-icons/FontAwesome5";
-import IconF from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { useRoute } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker";
-
-const ChoqA = () => {
+const ChoqSeulRecap = () => {
   const navigation = useNavigation();
-  const [squares, setSquares] = useState(Array(12).fill(false));
-  const toggleSquare = (index) => {
-    const updatedSquares = [...squares];
-    updatedSquares[index] = !updatedSquares[index];
-    setSquares(updatedSquares);
-  };
+  const { squares } = useRoute().params;
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
     }
     return {};
   };
-  const [choc, setChoc] = useState(false);
-  const [remorque, setRemorque] = useState(false);
-  const [damage, setDamage] = useState("");
-  const [images, setImages] = useState([]);
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled && result.assets) {
-      setImages([...images, result.assets[0].uri]);
-    }
-  };
   return (
     <Screen>
-      <DynamicHeader screen="Contrat" num={2} />
-      <VehiculeIndication letter="A" />
-      <View
-        style={{
-          flexDirection: "row",
-          marginVertical: 20,
-          alignItems: "center",
-        }}
-      >
-        <Icon name="lightbulb" color="#ffffff" size={30} />
-        <Text style={{ fontSize: 16, color: "#ffffff", marginLeft: 10 }}>
-          Cliquez sur une zone du véhicule pour indiquer le point de choc
-          initial
-        </Text>
+      <DynamicHeader screen="ChoqSeul" num={2} />
+      <Text style={[styles.textColor, { marginTop: 30 }]}>
+        Informations renseignés :{" "}
+      </Text>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>Numéro de Contrat</Text>
+      </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>Nom et Prénom de l'assuré(e)</Text>
+      </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>Nom et Prénom du conductuer</Text>
+      </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>Numéro de téléphone</Text>
+      </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>Adresse E-mail</Text>
       </View>
       <View
         style={{
@@ -93,7 +78,6 @@ const ChoqA = () => {
               },
               backColor(squares[0]),
             ]}
-            onPress={() => toggleSquare(0)}
           />
           <Pressable
             style={[
@@ -105,7 +89,6 @@ const ChoqA = () => {
               },
               backColor(squares[1]),
             ]}
-            onPress={() => toggleSquare(1)}
           />
           <Pressable
             style={[
@@ -117,7 +100,6 @@ const ChoqA = () => {
               },
               backColor(squares[2]),
             ]}
-            onPress={() => toggleSquare(2)}
           />
           <Pressable
             style={[
@@ -129,7 +111,6 @@ const ChoqA = () => {
               },
               backColor(squares[3]),
             ]}
-            onPress={() => toggleSquare(3)}
           />
           <Pressable
             style={[
@@ -141,7 +122,6 @@ const ChoqA = () => {
               },
               backColor(squares[4]),
             ]}
-            onPress={() => toggleSquare(4)}
           />
           <Pressable
             style={[
@@ -153,7 +133,6 @@ const ChoqA = () => {
               },
               backColor(squares[5]),
             ]}
-            onPress={() => toggleSquare(5)}
           />
           <Pressable
             style={{
@@ -189,7 +168,6 @@ const ChoqA = () => {
               },
               backColor(squares[6]),
             ]}
-            onPress={() => toggleSquare(6)}
           />
           <Pressable
             style={[
@@ -201,7 +179,6 @@ const ChoqA = () => {
               },
               backColor(squares[7]),
             ]}
-            onPress={() => toggleSquare(7)}
           />
           <Pressable
             style={[
@@ -213,7 +190,6 @@ const ChoqA = () => {
               },
               backColor(squares[8]),
             ]}
-            onPress={() => toggleSquare(8)}
           />
           <Pressable
             style={[
@@ -225,7 +201,6 @@ const ChoqA = () => {
               },
               backColor(squares[9]),
             ]}
-            onPress={() => toggleSquare(9)}
           />
           <Pressable
             style={[
@@ -237,7 +212,6 @@ const ChoqA = () => {
               },
               backColor(squares[10]),
             ]}
-            onPress={() => toggleSquare(10)}
           />
           <Pressable
             style={[
@@ -249,7 +223,6 @@ const ChoqA = () => {
               },
               backColor(squares[11]),
             ]}
-            onPress={() => toggleSquare(11)}
           />
         </View>
         <Image
@@ -263,100 +236,63 @@ const ChoqA = () => {
           resizeMode="contain"
         />
       </View>
-      <View style={{ marginTop: 25 }}>
-        <View style={styles.cont}>
-          <Text style={styles.textColor}>Pas de point de choc</Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#ffffff" }}
-            thumbColor={choc ? "red" : "#f4f3f4"}
-            onValueChange={() => setChoc((prev) => !prev)}
-            value={choc}
-          />
-        </View>
-        <View style={styles.cont}>
-          <Text style={styles.textColor}>Je tractais une remorque</Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#ffffff" }}
-            thumbColor={remorque ? "red" : "#f4f3f4"}
-            onValueChange={() => setRemorque((prev) => !prev)}
-            value={remorque}
-          />
-        </View>
-      </View>
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.titre}>Télécharger une photo des dégâts</Text>
-        <Pressable onPress={pickImage} style={styles.photo}>
-          <IconF name="photo" size={20} color="#ffffff" />
-          <Text
-            style={{
-              marginLeft: 10,
-              fontSize: 22,
-              color: "#ffffff",
-              paddingVertical: 10,
-            }}
-          >
-            Ajouter une Photo
-          </Text>
-        </Pressable>
-      </View>
-      {images.length > 0 && (
-        <View style={styles.imageContainer}>
-          {images.map((ele) => (
-            <Image
-              key={ele}
-              source={{ uri: ele }}
-              style={{ width: 160, height: 160 }}
-            />
-          ))}
-        </View>
-      )}
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
-          value={damage}
-          onChangeText={(t) => setDamage(t)}
           textAlignVertical="top"
-          style={styles.descreption}
+          style={{
+            color: "#ffffff",
+            borderRadius: 8,
+            borderWidth: 1,
+            borderColor: "#ffffff",
+            paddingVertical: 15,
+            paddingHorizontal: 15,
+            height: 150,
+          }}
         />
+        <Pressable onPress={() => navigation.navigate("ChoqSeul")}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 20,
+              marginVertical: 20,
+              paddingVertical: 15,
+              color: "#ffffff",
+              backgroundColor: "red",
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: "#ffffff",
+            }}
+          >
+            Modifier
+          </Text>
+        </Pressable>
       </View>
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("Contrat")}
+          onPress={() => navigation.navigate("ChoqSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoqArecap", { squares })}
+          onPress={() => navigation.navigate("CirconstanceSeul")}
         />
       </View>
     </Screen>
   );
 };
+
 const styles = StyleSheet.create({
-  textColor: { color: "#ffffff", fontSize: 20 },
-  descreption: {
+  textColor: {
     color: "#ffffff",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#ffffff",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    height: 150,
+    fontSize: 18,
+    paddingHorizontal: 20,
   },
-  photo: {
+  line: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    marginHorizontal: 5,
     marginVertical: 5,
-    backgroundColor: "red",
-    borderWidth: 1,
-    borderColor: "#ffffff",
-    borderRadius: 8,
-  },
-  cont: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   titre: {
     color: "#ffffff",
@@ -369,30 +305,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 30,
   },
-  imageContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-    gap: 20,
-    marginVertical: 20,
-  },
-  text: {
-    marginLeft: 10,
-    fontSize: 22,
-    color: "#ffffff",
-    paddingVertical: 10,
-  },
-  buttonStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 5,
-    backgroundColor: "red",
-    borderWidth: 1,
-    borderColor: "#ffffff",
-    borderRadius: 8,
-  },
 });
 
-export default ChoqA;
+export default ChoqSeulRecap;

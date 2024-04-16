@@ -12,14 +12,14 @@ const InfoAssurance = () => {
   const navigation = useNavigation();
   return (
     <Screen>
-      <DynamicHeader num={1} screen="" />
+      <DynamicHeader num={1} screen="TémoinB" />
       <Title text="Assurances et immatricualations" />
       <BoxAssurance letter="A" />
       <BoxAssurance letter="B" />
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ModeSaisie")}
+          onPress={() => navigation.navigate("TémoinB")}
         />
         <ButtonRouge
           title="Suivant"

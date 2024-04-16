@@ -16,7 +16,9 @@ import IconF from "react-native-vector-icons/FontAwesome";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-const ChoqB = () => {
+import * as ImagePicker from "expo-image-picker";
+
+const ChoqA = () => {
   const navigation = useNavigation();
   const [squares, setSquares] = useState(Array(12).fill(false));
   const toggleSquare = (index) => {
@@ -33,9 +35,22 @@ const ChoqB = () => {
   const [choc, setChoc] = useState(false);
   const [remorque, setRemorque] = useState(false);
   const [damage, setDamage] = useState("");
+  const [images, setImages] = useState([]);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled && result.assets) {
+      setImages([...images, result.assets[0].uri]);
+    }
+  };
   return (
     <Screen>
-      <DynamicHeader screen="Contrat" num={2} />
+      <DynamicHeader screen="ChoqArecap" num={2} />
       <VehiculeIndication letter="B" />
       <View
         style={{
@@ -270,18 +285,7 @@ const ChoqB = () => {
       </View>
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Télécharger une photo des dégâts</Text>
-        <Pressable
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginVertical: 5,
-            backgroundColor: "red",
-            borderWidth: 1,
-            borderColor: "#ffffff",
-            borderRadius: 8,
-          }}
-        >
+        <Pressable onPress={pickImage} style={styles.photo}>
           <IconF name="photo" size={20} color="#ffffff" />
           <Text
             style={{
@@ -295,21 +299,24 @@ const ChoqB = () => {
           </Text>
         </Pressable>
       </View>
+      {images.length > 0 && (
+        <View style={styles.imageContainer}>
+          {images.map((ele) => (
+            <Image
+              key={ele}
+              source={{ uri: ele }}
+              style={{ width: 160, height: 160 }}
+            />
+          ))}
+        </View>
+      )}
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
           value={damage}
           onChangeText={(t) => setDamage(t)}
           textAlignVertical="top"
-          style={{
-            color: "#ffffff",
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: "#ffffff",
-            paddingVertical: 15,
-            paddingHorizontal: 15,
-            height: 150,
-          }}
+          style={styles.descreption}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -326,8 +333,26 @@ const ChoqB = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {},
   textColor: { color: "#ffffff", fontSize: 20 },
+  descreption: {
+    color: "#ffffff",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    height: 150,
+  },
+  photo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 5,
+    backgroundColor: "red",
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    borderRadius: 8,
+  },
   cont: {
     flexDirection: "row",
     alignItems: "center",
@@ -344,6 +369,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 30,
   },
+  imageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    gap: 20,
+    marginVertical: 20,
+  },
+  text: {
+    marginLeft: 10,
+    fontSize: 22,
+    color: "#ffffff",
+    paddingVertical: 10,
+  },
+  buttonStyle: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 5,
+    backgroundColor: "red",
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    borderRadius: 8,
+  },
 });
 
-export default ChoqB;
+export default ChoqA;

@@ -112,7 +112,7 @@ const ModeSaisie = () => {
                 Annuler
               </Text>
             </Pressable>
-            <Pressable>
+            <Pressable onPress={() => navigation.navigate("ChoixVéhiculeSeul")}>
               <Text
                 style={{
                   color: "#ffffff",

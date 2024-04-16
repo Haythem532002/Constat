@@ -6,20 +6,18 @@ import Title from "../Components/Title";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import VehiculeIndication from "../Components/VehiculeIndication";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Label from "../Components/Label";
 import Input from "../Components/Input";
-const InfoAssuranceA = () => {
+const InfoAssuranceSeul = () => {
   const navigation = useNavigation();
   const [assurance, setAssurance] = useState("");
   const [immatriculation, setImmatriculation] = useState("");
   return (
     <Screen>
-      <DynamicHeader num={1} screen="Témoin" />
+      <DynamicHeader num={1} screen="TémoinSeul" />
       <Title text="Assurance et immatriculation " />
       <View style={styles.container}>
-        <VehiculeIndication letter="A" />
         <Label text="Assurance" />
         <Input value={assurance} onChangeText={(a) => setAssurance(a)} />
         <View
@@ -44,11 +42,11 @@ const InfoAssuranceA = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("TémoinB")}
+          onPress={() => navigation.navigate("TémoinSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("InfoAssuranceB")}
+          onPress={() => navigation.navigate("ContratSeul")}
         />
       </View>
     </Screen>
@@ -67,8 +65,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 50,
+    paddingTop: 150,
   },
 });
 
-export default InfoAssuranceA;
+export default InfoAssuranceSeul;
