@@ -91,6 +91,22 @@ const Vehicules = () => {
   );
 };
 
+const Line = () => {
+  return (
+    <View style={{ alignItems: "center", marginVertical: 10 }}>
+      <View
+        style={{
+          backgroundColor: "#fff",
+          height: 3,
+          width: "90%",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      ></View>
+    </View>
+  );
+};
+
 const Circonstance = () => {
   const navigation = useNavigation();
   const [boxStatesA, setBoxStatesA] = useState({
@@ -158,37 +174,125 @@ const Circonstance = () => {
           text="en stationnement"
           checkedA={boxStatesA.stationnement}
           checkedB={boxStatesB.stationnement}
-          onToggleA={() => handleBoxToggleA("stationnement")}
-          onToggleB={() => handleBoxToggleB("stationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("stationnement");
+            if (boxStatesA.quittaitStationnement == true) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.prenaitStationnement == true) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("stationnement");
+            if (boxStatesB.quittaitStationnement == true) {
+              handleBoxToggleB("quittaitStationnement");
+            }
+            if (boxStatesB.prenaitStationnement == true) {
+              handleBoxToggleB("prenaitStationnement");
+            }
+            if (boxStatesB.aucun) {
+              handleBoxToggleB("aucun");
+            }
+          }}
         />
         <Box
           text="quittait un stationnement"
           checkedA={boxStatesA.quittaitStationnement}
           checkedB={boxStatesB.quittaitStationnement}
-          onToggleA={() => handleBoxToggleA("quittaitStationnement")}
-          onToggleB={() => handleBoxToggleB("quittaitStationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("quittaitStationnement");
+            if (boxStatesA.stationnement == true) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.prenaitStationnement == true) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("quittaitStationnement");
+            if (boxStatesB.stationnement == true) {
+              handleBoxToggleB("stationnement");
+            }
+            if (boxStatesB.prenaitStationnement == true) {
+              handleBoxToggleB("prenaitStationnement");
+            }
+            if (boxStatesB.aucun) {
+              handleBoxToggleB("aucun");
+            }
+          }}
         />
         <Box
           text="prenait un stationnement"
           checkedA={boxStatesA.prenaitStationnement}
           checkedB={boxStatesB.prenaitStationnement}
-          onToggleA={() => handleBoxToggleA("prenaitStationnement")}
-          onToggleB={() => handleBoxToggleB("prenaitStationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("prenaitStationnement");
+            if (boxStatesA.stationnement == true) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.quittaitStationnement == true) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("prenaitStationnement");
+            if (boxStatesB.stationnement == true) {
+              handleBoxToggleB("stationnement");
+            }
+            if (boxStatesB.quittaitStationnement == true) {
+              handleBoxToggleB("quittaitStationnement");
+            }
+            if (boxStatesB.aucun) {
+              handleBoxToggleB("aucun");
+            }
+          }}
         />
+        <Line />
         <Box
           text="sortait d'un parking,d'un lieu privé,d'un chemin de terre"
           checkedA={boxStatesA.sortaitParking}
           checkedB={boxStatesB.sortaitParking}
-          onToggleA={() => handleBoxToggleA("sortaitParking")}
-          onToggleB={() => handleBoxToggleB("sortaitParking")}
+          onToggleA={() => {
+            handleBoxToggleA("sortaitParking");
+            if (boxStatesA.sengageaitParking) {
+              handleBoxToggleA("sengageaitParking");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("sortaitParking");
+            if (boxStatesB.sengageaitParking) {
+              handleBoxToggleB("sengageaitParking");
+            }
+          }}
         />
         <Box
           text="s'engageait dans un parking, un lieu privé,un chemin de terre"
           checkedA={boxStatesA.sengageaitParking}
           checkedB={boxStatesB.sengageaitParking}
-          onToggleA={() => handleBoxToggleA("sengageaitParking")}
-          onToggleB={() => handleBoxToggleB("sengageaitParking")}
+          onToggleA={() => {
+            handleBoxToggleA("sengageaitParking");
+            if (boxStatesA.sortaitParking) {
+              handleBoxToggleA("sortaitParking");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("sengageaitParking");
+            if (boxStatesB.sortaitParking) {
+              handleBoxToggleB("sortaitParking");
+            }
+          }}
         />
+        <Line />
         <Box
           text="arrét de circulation"
           checkedA={boxStatesA.arretCirculation}
@@ -207,15 +311,35 @@ const Circonstance = () => {
           text="heurtait à l'arriere,en roulant dans le méme sens et sur une méme file"
           checkedA={boxStatesA.heurtaitArriere}
           checkedB={boxStatesB.heurtaitArriere}
-          onToggleA={() => handleBoxToggleA("heurtaitArriere")}
-          onToggleB={() => handleBoxToggleB("heurtaitArriere")}
+          onToggleA={() => {
+            handleBoxToggleA("heurtaitArriere");
+            if (boxStatesA.roulaitMemeSens) {
+              handleBoxToggleA("roulaitMemeSens");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("heurtaitArriere");
+            if (boxStatesB.roulaitMemeSens) {
+              handleBoxToggleB("roulaitMemeSens");
+            }
+          }}
         />
         <Box
           text="roulait dans le méme sens et sur une file différente"
           checkedA={boxStatesA.roulaitMemeSens}
           checkedB={boxStatesB.roulaitMemeSens}
-          onToggleA={() => handleBoxToggleA("roulaitMemeSens")}
-          onToggleB={() => handleBoxToggleB("roulaitMemeSens")}
+          onToggleA={() => {
+            handleBoxToggleA("roulaitMemeSens");
+            if (boxStatesA.heurtaitArriere) {
+              handleBoxToggleA("heurtaitArriere");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("roulaitMemeSens");
+            if (boxStatesB.heurtaitArriere) {
+              handleBoxToggleB("heurtaitArriere");
+            }
+          }}
         />
         <Box
           text="changeait de file"
@@ -231,20 +355,42 @@ const Circonstance = () => {
           onToggleA={() => handleBoxToggleA("doublait")}
           onToggleB={() => handleBoxToggleB("doublait")}
         />
+        <Line />
         <Box
           text="virait à droite"
           checkedA={boxStatesA.viraitDroite}
           checkedB={boxStatesB.viraitDroite}
-          onToggleA={() => handleBoxToggleA("viraitDroite")}
-          onToggleB={() => handleBoxToggleB("viraitDroite")}
+          onToggleA={() => {
+            handleBoxToggleA("viraitDroite");
+            if (boxStatesA.viraitGauche) {
+              handleBoxToggleA("viraitGauche");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("viraitDroite");
+            if (boxStatesB.viraitGauche) {
+              handleBoxToggleB("viraitGauche");
+            }
+          }}
         />
         <Box
           text="virait à gauche"
           checkedA={boxStatesA.viraitGauche}
           checkedB={boxStatesB.viraitGauche}
-          onToggleA={() => handleBoxToggleA("viraitGauche")}
-          onToggleB={() => handleBoxToggleB("viraitGauche")}
+          onToggleA={() => {
+            handleBoxToggleA("viraitGauche");
+            if (boxStatesA.viraitDroite) {
+              handleBoxToggleA("viraitDroite");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("viraitGauche");
+            if (boxStatesB.viraitDroite) {
+              handleBoxToggleB("viraitDroite");
+            }
+          }}
         />
+        <Line />
         <Box
           text="reculait"
           checkedA={boxStatesA.reculait}
@@ -270,8 +416,18 @@ const Circonstance = () => {
           text="n'avait pas observé le signal de priorité"
           checkedA={boxStatesA.navaitPasObserved}
           checkedB={boxStatesB.navaitPasObserved}
-          onToggleA={() => handleBoxToggleA("navaitPasObserved")}
-          onToggleB={() => handleBoxToggleB("navaitPasObserved")}
+          onToggleA={() => {
+            handleBoxToggleA("navaitPasObserved");
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("navaitPasObserved");
+            if (boxStatesB.aucun) {
+              handleBoxToggleB("aucun");
+            }
+          }}
         />
       </View>
       <View
@@ -288,8 +444,114 @@ const Circonstance = () => {
           text="Ma situation ne correspond à aucune de ces propositions"
           checkedA={boxStatesA.aucun}
           checkedB={boxStatesB.aucun}
-          onToggleA={() => handleBoxToggleA("aucun")}
-          onToggleB={() => handleBoxToggleB("aucun")}
+          onToggleA={() => {
+            handleBoxToggleA("aucun");
+            if (boxStatesA.stationnement) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.quittaitStationnement) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.prenaitStationnement) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.sortaitParking) {
+              handleBoxToggleA("sortaitParking");
+            }
+            if (boxStatesA.sengageaitParking) {
+              handleBoxToggleA("sengageaitParking");
+            }
+            if (boxStatesA.arretCirculation) {
+              handleBoxToggleA("arretCirculation");
+            }
+            if (boxStatesA.frottement) {
+              handleBoxToggleA("frottement");
+            }
+            if (boxStatesA.heurtaitArriere) {
+              handleBoxToggleA("heurtaitArriere");
+            }
+            if (boxStatesA.roulaitMemeSens) {
+              handleBoxToggleA("roulaitMemeSens");
+            }
+            if (boxStatesA.changeaitFile) {
+              handleBoxToggleA("changeaitFile");
+            }
+            if (boxStatesA.doublait) {
+              handleBoxToggleA("doublait");
+            }
+            if (boxStatesA.viraitDroite) {
+              handleBoxToggleA("viraitDroite");
+            }
+            if (boxStatesA.viraitGauche) {
+              handleBoxToggleA("viraitGauche");
+            }
+            if (boxStatesA.reculait) {
+              handleBoxToggleA("reculait");
+            }
+            if (boxStatesA.empletait) {
+              handleBoxToggleA("empletait");
+            }
+            if (boxStatesA.venaitDroite) {
+              handleBoxToggleA("venaitDroite");
+            }
+            if (boxStatesA.navaitPasObserved) {
+              handleBoxToggleA("navaitPasObserved");
+            }
+          }}
+          onToggleB={() => {
+            handleBoxToggleB("aucun");
+            if (boxStatesB.stationnement) {
+              handleBoxToggleB("stationnement");
+            }
+            if (boxStatesB.quittaitStationnement) {
+              handleBoxToggleB("quittaitStationnement");
+            }
+            if (boxStatesB.prenaitStationnement) {
+              handleBoxToggleB("prenaitStationnement");
+            }
+            if (boxStatesB.sortaitParking) {
+              handleBoxToggleB("sortaitParking");
+            }
+            if (boxStatesB.sengageaitParking) {
+              handleBoxToggleB("sengageaitParking");
+            }
+            if (boxStatesB.arretCirculation) {
+              handleBoxToggleB("arretCirculation");
+            }
+            if (boxStatesB.frottement) {
+              handleBoxToggleB("frottement");
+            }
+            if (boxStatesB.heurtaitArriere) {
+              handleBoxToggleB("heurtaitArriere");
+            }
+            if (boxStatesB.roulaitMemeSens) {
+              handleBoxToggleB("roulaitMemeSens");
+            }
+            if (boxStatesB.changeaitFile) {
+              handleBoxToggleB("changeaitFile");
+            }
+            if (boxStatesB.doublait) {
+              handleBoxToggleB("doublait");
+            }
+            if (boxStatesB.viraitDroite) {
+              handleBoxToggleB("viraitDroite");
+            }
+            if (boxStatesB.viraitGauche) {
+              handleBoxToggleB("viraitGauche");
+            }
+            if (boxStatesB.reculait) {
+              handleBoxToggleB("reculait");
+            }
+            if (boxStatesB.empletait) {
+              handleBoxToggleB("empletait");
+            }
+            if (boxStatesB.venaitDroite) {
+              handleBoxToggleB("venaitDroite");
+            }
+            if (boxStatesB.navaitPasObserved) {
+              handleBoxToggleB("navaitPasObserved");
+            }
+          }}
         />
       </View>
       <View style={styles.buttonContainer}>

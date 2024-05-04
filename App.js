@@ -48,7 +48,6 @@ import SignatureB from "./Screens/SignatureB";
 import SignatureSeul from "./Screens/SignatureSeul";
 import Croquis from "./Screens/Croquis";
 import CroquisSeul from "./Screens/CroquisSeul";
-//#151B26
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -58,7 +57,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignatureSeul">
+        <Stack.Navigator initialRouteName="ChoqA">
           <Stack.Screen
             name="Home"
             component={Home}

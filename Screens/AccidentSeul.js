@@ -28,7 +28,6 @@ const AccidentSeul = () => {
         setErrorMsg("Permission to access location was denied");
         return;
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
@@ -42,13 +41,17 @@ const AccidentSeul = () => {
   }
   return (
     <Screen>
-      <DynamicHeader screen="CirconstanceSeul" num={3} />
-      <Title text="Indiquer la date, l'heure et le lieu de l'accident." />
-      <Label text="Date" />
-      <Input value={date} onChangeText={setDate} />
-      <Label text="Heure" />
-      <Input value={heure} onChangeText={setHeure} />
-      <Label text="Lieu (Adresse,Route,etc..)" />
+      <DynamicHeader screen="ChoqSeulRecap" num={3} />
+      <Title text="Indiquer la date, l'heure et le lieu de l'accident" />
+      <Label text="Date" required={true} />
+      <Input
+        value={new Date().toLocaleDateString()}
+        style={{ fontSize: 22 }}
+        onChangeText={setDate}
+      />
+      <Label text="Heure" required={true} />
+      <Input value={new Date().toLocaleTimeString()} onChangeText={setHeure} />
+      <Label text="Lieu (Adresse,Route,etc..)" required={true} />
       <Input value={lieu} onChangeText={setLieu} />
       <Label text="Code Postal" />
       <Input value={codePostal} onChangeText={setCodePostal} />
@@ -57,11 +60,11 @@ const AccidentSeul = () => {
       <Pressable>
         <Text style={styles.button}>Me Localiser</Text>
       </Pressable>
-      <Text style={styles.paragraph}>{text}</Text>
+      {/* <Text style={styles.paragraph}>{text}</Text> */}
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("CirconstanceSeul")}
+          onPress={() => navigation.navigate("ChoqSeulRecap")}
         />
         <ButtonRouge
           title="Suivant"

@@ -17,7 +17,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 const ChoqArecap = () => {
   const navigation = useNavigation();
-  const { squares } = useRoute().params;
+  const squares = useRoute().params ? useRoute().params.squares : null;
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
@@ -44,10 +44,6 @@ const ChoqArecap = () => {
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
         <Text style={styles.textColor}>Numéro de téléphone</Text>
-      </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Adresse E-mail</Text>
       </View>
       <View
         style={{

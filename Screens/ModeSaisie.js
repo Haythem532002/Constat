@@ -5,28 +5,12 @@ import {
   StyleSheet,
   Pressable,
   Image,
-  Modal,
   TextInput,
 } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../Components/Title";
-
-const Button = ({ text }) => {
-  return (
-    <Text
-      style={{
-        color: "#ffffff",
-        width: 150,
-        textAlign: "center",
-        paddingVertical: 20,
-      }}
-    >
-      {text}
-    </Text>
-  );
-};
 
 const ModeSaisie = () => {
   const navigation = useNavigation();
@@ -41,7 +25,7 @@ const ModeSaisie = () => {
   const generateRandomCode = () => {
     let code = "";
     for (let i = 0; i < 5; i++) {
-      code += Math.floor(Math.random() * 10); 
+      code += Math.floor(Math.random() * 10);
     }
     setCode(code);
   };
@@ -96,46 +80,20 @@ const ModeSaisie = () => {
             }}
           >
             <Pressable onPress={() => setModalVisible(false)}>
-              <Text
-                style={{
-                  color: "#ffffff",
-                  width: 150,
-                  textAlign: "center",
-                  paddingVertical: 20,
-                  borderRadius: 8,
-                  borderColor: "#ffffff",
-                  borderWidth: 1,
-                  fontSize: 20,
-                  marginRight: 10,
-                }}
-              >
+              <Text style={[styles.buttonStyle, { marginRight: 10 }]}>
                 Annuler
               </Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate("ChoixVéhiculeSeul")}>
-              <Text
-                style={{
-                  color: "#ffffff",
-                  width: 150,
-                  textAlign: "center",
-                  paddingVertical: 20,
-                  backgroundColor: "red",
-                  borderRadius: 8,
-                  borderColor: "#ffffff",
-                  borderWidth: 1,
-                  fontSize: 20,
-                }}
-              >
-                Valider
-              </Text>
+              <Text style={[styles.buttonStyle,{ backgroundColor: "red" }]}>Valider</Text>
             </Pressable>
           </View>
         </View>
       )}
       <View style={isOacity()}>
-        <DynamicHeader screen="Consigne" num={1} />
+        <DynamicHeader screen="Home" num={1} />
         <Title text="Choisir le mode de Saisie :" />
-        <View style={{ alignItems: "center" }}>
+        <View style={{ alignItems: "center" ,marginTop:-20}}>
           <Pressable onPress={() => navigation.navigate("ChoixVehiculeA")}>
             <View
               style={{
@@ -202,40 +160,15 @@ const ModeSaisie = () => {
 
 const styles = StyleSheet.create({
   textColor: { color: "#ffffff", fontSize: 20 },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
+  buttonStyle: {
+    color: "#ffffff",
+    width: 150,
     textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    paddingVertical: 20,
+    borderRadius: 8,
+    borderColor: "#ffffff",
+    borderWidth: 1,
+    fontSize: 20,
   },
 });
 

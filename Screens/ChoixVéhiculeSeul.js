@@ -7,6 +7,7 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import VehiculeIndication from "../Components/VehiculeIndication";
+import Title from "../Components/Title";
 const ChoixVehiculeSeul = () => {
   const navigation = useNavigation();
   const [vehicule, setVehicule] = useState("");
@@ -18,7 +19,8 @@ const ChoixVehiculeSeul = () => {
   return (
     <Screen>
       <DynamicHeader screen="ModeSaisie" num={1} />
-      <View style={{ marginTop: 95 }}>
+      <Title text="Choix Type Véhiclue : " />
+      <View>
         <View style={styles.container}>
           <Pressable
             onPress={() => {
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 160,
+    paddingTop: 180,
   },
 });
 

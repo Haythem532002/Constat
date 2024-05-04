@@ -5,6 +5,7 @@ const initialState = {
   assurance: "",
   immatriculation: "",
   numContrat: "",
+  marque: "",
 };
 
 const vehiculeSlice = createSlice({
@@ -27,6 +28,11 @@ const vehiculeSlice = createSlice({
   },
 });
 
-export const { setType, setAssurance, setImmatriculation, setNumContrat, resetState } =
-  vehiculeSlice.actions;
+export const {
+  setType,
+  setAssurance,
+  setImmatriculation,
+  setNumContrat,
+  resetState,
+} = vehiculeSlice.actions;
 export default vehiculeSlice.reducer;

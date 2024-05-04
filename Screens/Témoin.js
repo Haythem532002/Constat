@@ -7,36 +7,55 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
+import { useSelector } from "react-redux";
 
 const Témoin = () => {
   const navigation = useNavigation();
+  const { temoin1 } = useSelector((state) => state.choixVec);
+  const { vec1 } = useSelector((state) => state.choixVec);
+  console.log(temoin1);
+  console.log(vec1);
   return (
     <Screen>
       <Nav screen="ChoixVehiculeA" />
-      <Title text="Ajout des témoins (optionnel)" />
+      <Title text="Ajout des témoins A (optionnel)" />
       <Text style={styles.textColor}>
         Vous pouvez ajouter jusqu'à 4 témoins pour completer votre e-constat
       </Text>
-      <View style={styles.container}>
+      {temoin1.map((ele, index) => {
+        return (
+          <View key={index} style={styles.container}>
+            <View>
+              <Text style={styles.text}>Témoin {index + 1}</Text>
+              <Text style={styles.text}>{ele.fullName}</Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Pressable style={{ marginLeft: 20 }}>
+                <Icon name="trash" size={30} color="#ffffff" />
+              </Pressable>
+            </View>
+          </View>
+        );
+      })}
+
+      {/* <View style={styles.container}>
         <View>
           <Text style={styles.text}>Témoin 1</Text>
           <Text style={styles.text}>Haythem Khiari</Text>
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Pressable>
-            <Icon name="edit" size={30} color="#ffffff" />
-          </Pressable>
           <Pressable style={{ marginLeft: 20 }}>
             <Icon name="trash" size={30} color="#ffffff" />
           </Pressable>
         </View>
-      </View>
+      </View> */}
       <Pressable onPress={() => navigation.navigate("AjoutTémoinA")}>
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
+            marginTop: 20,
           }}
         >
           <Icon name="user-circle" size={20} color="#ddd" />
@@ -72,7 +91,7 @@ const Témoin = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 30,
+    marginVertical: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -90,7 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 280,
+    paddingTop: 400,
     marginBottom: 35,
   },
   text: {

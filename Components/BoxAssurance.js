@@ -25,20 +25,28 @@ const Renseigner = () => {
   );
 };
 
-const BoxAssurance = ({ letter }) => {
+const BoxAssurance = ({ letter, handle, assurance, immat }) => {
+  let a = "L'assureur du véhicule";
+  if (assurance.length != 0) {
+    a = assurance;
+  }
+  let i = "L'immatriculation du véhicule";
+  if (immat.length != 0) {
+    i = immat;
+  }
   return (
     <View style={styles.container}>
       <VehiculeIndication letter={letter} />
       <Text style={styles.textColor}>Informations renseignés : </Text>
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>L'assureur du véhicule</Text>
+        <Text style={styles.textColor}>{a}</Text>
       </View>
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>L'immatriculation du véhicule</Text>
+        <Text style={styles.textColor}>{i}</Text>
       </View>
-      <Pressable style={{ alignItems: "center" }}>
+      <Pressable onPress={handle} style={{ alignItems: "center" }}>
         <Renseigner />
       </Pressable>
     </View>

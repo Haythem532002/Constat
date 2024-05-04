@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Screen from "./Screen";
 import Title from "../Components/Title";
 import Nav from "../Components/Nav";
 import Label from "../Components/Label";
 import Input from "../Components/Input";
 import { useNavigation } from "@react-navigation/native";
+import { Alert } from "react-native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useDispatch } from "react-redux";
-import { setTemoin1 } from "../reducers/choixVehiculeReducer";
+import { setTemoin2 } from "../reducers/choixVehiculeReducer";
 
-const AjoutTémoinA = () => {
+const AjoutTémoinSeul = () => {
   const navigation = useNavigation();
   const [fullName, setFullName] = useState("");
   const [num, setNum] = useState("");
@@ -26,10 +27,9 @@ const AjoutTémoinA = () => {
     }
     return true;
   };
-
   return (
     <Screen>
-      <Nav screen="Témoin" />
+      <Nav screen="TémoinSeul" />
       <Title text="Ajout des témoins (optionnel)" />
       <Label text="Nom et Prénom" required={true} />
       <Input value={fullName} onChangeText={(text) => setFullName(text)} />
@@ -45,15 +45,15 @@ const AjoutTémoinA = () => {
         <ButtonBlanc
           title="Précedent"
           onPress={() => {
-            navigation.navigate("Témoin");
+            navigation.navigate("TémoinSeul");
           }}
         />
         <ButtonRouge
           title="Suivant"
           onPress={() => {
             if (validate()) {
-              dispatch(setTemoin1({ fullName, num, adresse, code, ville }));
-              navigation.navigate("Témoin");
+              dispatch(setTemoin2({ fullName, num, adresse, code, ville }));
+              navigation.navigate("TémoinSeul");
             } else {
               Alert.alert(
                 "Erreur lors de l'ajout",
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AjoutTémoinA;
+export default AjoutTémoinSeul;

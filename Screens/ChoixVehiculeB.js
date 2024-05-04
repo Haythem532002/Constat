@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable,Alert } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Vehicule from "../Components/Vehicule";
@@ -7,7 +7,10 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import VehiculeIndication from "../Components/VehiculeIndication";
+import { useDispatch } from "react-redux";
+import { setVec2 } from "../reducers/choixVehiculeReducer";
 const ChoixVehiculeB = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [vehicule, setVehicule] = useState("");
   const [checked, setChecked] = useState({
@@ -17,7 +20,7 @@ const ChoixVehiculeB = () => {
   });
   return (
     <Screen>
-      <DynamicHeader screen="Témoin" num={1} />
+      <DynamicHeader screen="ChoixVehiculeA" num={1} />
       <VehiculeIndication letter="B" />
       <View style={styles.container}>
         <Pressable
@@ -75,11 +78,23 @@ const ChoixVehiculeB = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("Témoin")}
+          onPress={() => navigation.navigate("ChoixVehiculeA")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("TémoinB")}
+          onPress={() => {
+            dispatch(setVec2(vehicule));
+            if (vehicule != "") {
+              navigation.navigate("TémoinB");
+            } else {
+              Alert.alert(
+                "Erreur",
+                "Vous devez choisir le type de véhicule",
+                [{ text: "OK" }],
+                { cancelable: false }
+              );
+            }
+          }}
         />
       </View>
     </Screen>

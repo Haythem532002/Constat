@@ -21,19 +21,13 @@ import * as ImagePicker from "expo-image-picker";
 const ChoqA = () => {
   const navigation = useNavigation();
   const [squares, setSquares] = useState(Array(12).fill(false));
-  const toggleSquare = (index) => {
-    const updatedSquares = [...squares];
-    updatedSquares[index] = !updatedSquares[index];
-    setSquares(updatedSquares);
-  };
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
     }
     return {};
   };
-  const [choc, setChoc] = useState(false);
-  const [remorque, setRemorque] = useState(false);
+  const [choc, setChoc] = useState(true);
   const [damage, setDamage] = useState("");
   const [images, setImages] = useState([]);
   const pickImage = async () => {
@@ -46,6 +40,13 @@ const ChoqA = () => {
 
     if (!result.cancelled && result.assets) {
       setImages([...images, result.assets[0].uri]);
+    }
+  };
+  const toggleSquare = (index) => {
+    const updatedSquares = squares.map((square, i) => i === index);
+    setSquares(updatedSquares);
+    if (choc) {
+      setChoc(false);
     }
   };
   return (
@@ -269,17 +270,11 @@ const ChoqA = () => {
           <Switch
             trackColor={{ false: "#767577", true: "#ffffff" }}
             thumbColor={choc ? "red" : "#f4f3f4"}
-            onValueChange={() => setChoc((prev) => !prev)}
+            onValueChange={() => {
+              setChoc((prev) => !prev);
+              setSquares(Array(12).fill(false));
+            }}
             value={choc}
-          />
-        </View>
-        <View style={styles.cont}>
-          <Text style={styles.textColor}>Je tractais une remorque</Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#ffffff" }}
-            thumbColor={remorque ? "red" : "#f4f3f4"}
-            onValueChange={() => setRemorque((prev) => !prev)}
-            value={remorque}
           />
         </View>
       </View>

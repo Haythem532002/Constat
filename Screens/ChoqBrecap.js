@@ -48,10 +48,6 @@ const ChoqBrecap = () => {
         <Icon name="circle" size={10} color="#ffffff" />
         <Text style={styles.textColor}>Numéro de téléphone</Text>
       </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Adresse E-mail</Text>
-      </View>
       <View
         style={{
           width: 360,

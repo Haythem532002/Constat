@@ -1,8 +1,13 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { Text, StyleSheet } from "react-native";
 
-const Label = ({ text }) => {
-  return <Text style={styles.text}>{text}* : </Text>;
+const Label = ({ text, required }) => {
+  return (
+    <Text style={styles.text}>
+      {text}
+      {required && <Text> *</Text>} :{" "}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

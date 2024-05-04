@@ -37,8 +37,6 @@ const Box = ({ text, checkedA,  onToggleA }) => {
   );
 };
 
-
-
 const CirconstanceSeul = () => {
   const navigation = useNavigation();
   const [boxStatesA, setBoxStatesA] = useState({

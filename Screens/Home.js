@@ -52,7 +52,7 @@ const Home = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Pressable
-          onPress={() => navigation.navigate("Consigne")}
+          onPress={() => navigation.navigate("ModeSaisie")}
           style={styles.button}
         >
           <Text
@@ -82,7 +82,7 @@ const Home = () => {
             { fontSize: 18, marginTop: 20, fontWeight: "bold" },
           ]}
         >
-          Tunisie Assureurs 2024
+          Développé par Haythem - Wassim
         </Text>
       </View>
     </Screen>

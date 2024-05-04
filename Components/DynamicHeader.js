@@ -17,7 +17,7 @@ const DynamicHeader = ({ screen, num }) => {
           <Text style={styles.textColor}>Retour</Text>
         </Pressable>
         <View style={[styles.container]}>
-          <Text style={styles.textColor}>Etape{num}/7</Text>
+          <Text style={styles.textColor}>Step {num}/6</Text>
         </View>
         <Bars />
       </View>

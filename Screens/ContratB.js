@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import { View, StyleSheet, Switch, Alert } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -9,11 +9,12 @@ import Input from "../Components/Input";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setContratA } from "../reducers/contrat";
 
 const ContratB = () => {
   const navigation = useNavigation();
 
-  const [numeroContrat, setNumeroContrat] = useState("");
   const [nomAssure, setNomAssure] = useState("");
   const [prenomAssure, setPrenomAssure] = useState("");
   const [numeroTelephone, setNumeroTelephone] = useState("");
@@ -21,22 +22,24 @@ const ContratB = () => {
   const [isAssureConducteur, setIsAssureConducteur] = useState(false);
   const [nomConducteur, setNomConducteur] = useState("");
   const [prenomConducteur, setPrenomConducteur] = useState("");
-  const [adresseEmail, setAdresseEmail] = useState("");
+  const [permis, setPermis] = useState("");
+  const [email, setEmail] = useState("");
 
   const toggleSwitch = () => setIsAssureConducteur((prev) => !prev);
 
+  const dispatch = useDispatch();
+  const obj = {};
+
   return (
     <Screen>
-      <DynamicHeader num={2} screen="ContratA" />
-      <Title text="Contrats et Conducteurs" />
-      <VehiculeIndication letter="B" />
-      <Label text="Numéro de contrat" />
-      <Input value={numeroContrat} onChangeText={setNumeroContrat} />
-      <Label text="Nom de l'assuré ou raison sociale" />
+      <DynamicHeader num={2} screen="Contrat" />
+      <Title text="Informations Sur L'assuré et Conducteur" />
+      <VehiculeIndication letter="A" />
+      <Label text="Nom de l'assuré" required={true} />
       <Input value={nomAssure} onChangeText={setNomAssure} />
-      <Label text="Prénom de l'assuré" />
+      <Label text="Prénom de l'assuré" required={true} />
       <Input value={prenomAssure} onChangeText={setPrenomAssure} />
-      <Label text="Numéro de téléphone" />
+      <Label text="Numéro de téléphone" required={true} />
       <Input value={numeroTelephone} onChangeText={setNumeroTelephone} />
       <Label text="Code Postal" />
       <Input value={codePostal} onChangeText={setCodePostal} />
@@ -53,22 +56,60 @@ const ContratB = () => {
       </View>
       {!isAssureConducteur && (
         <View>
-          <Label text="Nom de conducteur" />
+          <Label text="Nom de conducteur" required={true} />
           <Input value={nomConducteur} onChangeText={setNomConducteur} />
-          <Label text="Prénom de conducteur" />
+          <Label text="Prénom de conducteur" required={true} />
           <Input value={prenomConducteur} onChangeText={setPrenomConducteur} />
-          <Label text="Adresse E-mail" />
-          <Input value={adresseEmail} onChangeText={setAdresseEmail} />
         </View>
       )}
+      <Label text="Permis de conduire" required={true} />
+      <Input value={permis} onChangeText={setPermis} />
+      <Label text="E-mail" required={true} />
+      <Input value={email} onChangeText={setEmail} />
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ContratA")}
+          onPress={() => navigation.navigate("Contrat")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("Contrat")}
+          onPress={() => {
+            if (nomAssure && prenomAssure && numeroTelephone) {
+              obj["nomAssure"] = nomAssure;
+              obj["prenomAssure"] = prenomAssure;
+              obj["numeroTelAssure"] = numeroTelephone;
+              obj["codePostal"] = codePostal;
+              obj["isAssureConducteur"] = isAssureConducteur;
+              if (!isAssureConducteur) {
+                if (nomConducteur && prenomConducteur && permis) {
+                  obj["nomConducteur"] = nomConducteur;
+                  obj["prenomConducteur"] = prenomConducteur;
+                  obj["permis"] = permis;
+                  dispatch(setContratA(obj));
+                  navigation.navigate("Contrat");
+                } else {
+                  Alert.alert(
+                    "Erreur lors de l'ajout",
+                    "Vous devez entrer tous les champs obligatoires",
+                    [{ text: "OK" }],
+                    { cancelable: false }
+                  );
+                }
+              } else {
+                obj["nomConducteur"] = nomAssure;
+                obj["prenomConducteur"] = prenomAssure;
+                dispatch(setContratA(obj));
+                navigation.navigate("Contrat");
+              }
+            } else {
+              Alert.alert(
+                "Erreur lors de l'ajout",
+                "Vous devez entrer tous les champs obligatoires",
+                [{ text: "OK" }],
+                { cancelable: false }
+              );
+            }
+          }}
         />
       </View>
     </Screen>
@@ -76,7 +117,6 @@ const ContratB = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",

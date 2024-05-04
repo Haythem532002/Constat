@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
-import VehiculeIndication from "../Components/VehiculeIndication";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
@@ -28,7 +27,7 @@ const SignatureSeul = () => {
     }`;
   return (
     <Screen>
-      <DynamicHeader screen="ObservationSeul" num={5} />
+      <DynamicHeader screen="ObservationSeul" num={6} />
       <Title text="Signature" />
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Veuillez signer avec le doight :{" "}
@@ -48,10 +47,7 @@ const SignatureSeul = () => {
           title="Précedent"
           onPress={() => navigation.navigate("ObservationSeul")}
         />
-        <ButtonRouge
-          title="Suivant"
-          onPress={() => navigation.navigate("SignatureB")}
-        />
+        <ButtonRouge title="Suivant" />
       </View>
     </Screen>
   );

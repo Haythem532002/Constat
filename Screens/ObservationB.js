@@ -12,9 +12,11 @@ const ObservationB = () => {
   const [commentaire, setCommentaire] = useState("");
   return (
     <Screen>
-      <DynamicHeader screen="InfoSupp" num={5} />
+      <DynamicHeader screen="ObservationA" num={5} />
       <Title text="Observations" />
-      <VehiculeIndication letter="B" />
+      <View style={{ marginTop: -20 }}>
+        <VehiculeIndication letter="B" />
+      </View>
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Ajouter des précisions sur l'accident :{" "}
       </Text>
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 210,
+    paddingTop: 230,
   },
 });
 

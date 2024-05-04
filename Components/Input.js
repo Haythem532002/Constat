@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
-const Input = ({ value, onChangeText }) => {
+const Input = ({ value, onChangeText, style }) => {
   return (
     <TextInput
-      style={styles.input}
+      style={[styles.input, style]}
       value={value}
       onChangeText={onChangeText}
     />
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffffff",
     paddingVertical: 8,
     paddingHorizontal: 15,
+    fontSize: 20,
   },
 });
 

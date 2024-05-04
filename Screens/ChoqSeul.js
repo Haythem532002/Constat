@@ -22,8 +22,7 @@ const ChoqSeul = () => {
   const navigation = useNavigation();
   const [squares, setSquares] = useState(Array(12).fill(false));
   const toggleSquare = (index) => {
-    const updatedSquares = [...squares];
-    updatedSquares[index] = !updatedSquares[index];
+    const updatedSquares = squares.map((square, i) => i === index);
     setSquares(updatedSquares);
   };
   const backColor = (checked) => {
@@ -33,7 +32,6 @@ const ChoqSeul = () => {
     return {};
   };
   const [choc, setChoc] = useState(false);
-  const [remorque, setRemorque] = useState(false);
   const [damage, setDamage] = useState("");
   const [images, setImages] = useState([]);
   const pickImage = async () => {
@@ -50,7 +48,7 @@ const ChoqSeul = () => {
   };
   return (
     <Screen>
-      <DynamicHeader screen="Contrat" num={2} />
+      <DynamicHeader screen="ContratSeul" num={2} />
       <View
         style={{
           flexDirection: "row",
@@ -272,15 +270,6 @@ const ChoqSeul = () => {
             value={choc}
           />
         </View>
-        <View style={styles.cont}>
-          <Text style={styles.textColor}>Je tractais une remorque</Text>
-          <Switch
-            trackColor={{ false: "#767577", true: "#ffffff" }}
-            thumbColor={remorque ? "red" : "#f4f3f4"}
-            onValueChange={() => setRemorque((prev) => !prev)}
-            value={remorque}
-          />
-        </View>
       </View>
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Télécharger une photo des dégâts</Text>
@@ -321,7 +310,7 @@ const ChoqSeul = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("Contrat")}
+          onPress={() => navigation.navigate("ContratSeul")}
         />
         <ButtonRouge
           title="Suivant"

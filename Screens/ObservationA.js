@@ -14,7 +14,9 @@ const ObservationA = () => {
     <Screen>
       <DynamicHeader screen="InfoSupp" num={5} />
       <Title text="Observations" />
-      <VehiculeIndication letter="A" />
+      <View style={{ marginTop: -20 }}>
+        <VehiculeIndication letter="A" />
+      </View>
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Ajouter des précisions sur l'accident :{" "}
       </Text>
@@ -31,8 +33,7 @@ const ObservationA = () => {
           borderWidth: 1,
           borderRadius: 8,
           fontSize: 18,
-          color:"#ffffff"
-          
+          color: "#ffffff",
         }}
         placeholder="Commentaire(optionnel)"
       />
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 210,
+    paddingTop: 230,
   },
 });
 

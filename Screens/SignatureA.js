@@ -28,9 +28,11 @@ const SignatureA = () => {
     }`;
   return (
     <Screen>
-      <DynamicHeader screen="ObservationB" num={5} />
+      <DynamicHeader screen="ObservationB" num={6} />
       <Title text="Signature" />
-      <VehiculeIndication letter="A" />
+      <View style={{ marginTop: -20 }}>
+        <VehiculeIndication letter="A" />
+      </View>
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Veuillez signer avec le doight :{" "}
       </Text>
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 60,
+    paddingTop: 80,
   },
   signatureCapture: {
     width: 300,
