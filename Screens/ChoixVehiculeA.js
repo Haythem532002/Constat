@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable,Alert } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Vehicule from "../Components/Vehicule";
@@ -34,10 +34,12 @@ const ChoixVehiculeA = () => {
           }}
         >
           <Vehicule
-            text={require("../assets/Car2.png")}
+            text={require("../assets/Carred.png")}
             checked={checked.car}
             w={160}
             h={180}
+            wid={200}
+            heig={200}
           />
         </Pressable>
         <Pressable
@@ -51,10 +53,12 @@ const ChoixVehiculeA = () => {
           }}
         >
           <Vehicule
-            text={require("../assets/Bike13.png")}
+            text={require("../assets/moto.png")}
             checked={checked.bike}
             w={160}
             h={180}
+            wid={150}
+            heig={150}
           />
         </Pressable>
         <Pressable
@@ -68,10 +72,12 @@ const ChoixVehiculeA = () => {
           }}
         >
           <Vehicule
-            text={require("../assets/Truck.png")}
+            text={require("../assets/Truckred.png")}
             checked={checked.truck}
             w={160}
             h={180}
+            wid={140}
+            heig={140}
           />
         </Pressable>
       </View>
@@ -84,7 +90,7 @@ const ChoixVehiculeA = () => {
           title="Suivant"
           onPress={() => {
             dispatch(setVec1(vehicule));
-            if (vehicule!="") {
+            if (vehicule != "") {
               navigation.navigate("ChoixVehiculeB");
             } else {
               Alert.alert(

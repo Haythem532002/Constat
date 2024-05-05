@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -11,19 +11,24 @@ import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import VehiculeIndication from "../Components/VehiculeIndication";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useRoute } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+
 const ChoqArecap = () => {
   const navigation = useNavigation();
-  const squares = useRoute().params ? useRoute().params.squares : null;
+  const { accidentA } = useSelector((state) => state.accident);
+  const { capturedImageUri, degat, squares, descreption } = accidentA;
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
     }
     return {};
   };
+  useEffect(() => {
+    console.log(accidentA);
+  }, []);
   return (
     <Screen>
       <DynamicHeader screen="ChoqA" num={2} />
@@ -235,32 +240,29 @@ const ChoqArecap = () => {
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
           textAlignVertical="top"
-          style={{
-            color: "#ffffff",
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: "#ffffff",
-            paddingVertical: 15,
-            paddingHorizontal: 15,
-            height: 150,
-          }}
+          style={styles.desc}
+          value={descreption}
+          editable={false}
         />
+        {capturedImageUri && (
+          <Image
+            source={{ uri: capturedImageUri }}
+            style={{ width: 365, height: 200, borderRadius: 8 }}
+          />
+        )}
+        {degat.length > 0 && (
+          <View style={styles.imageContainer}>
+            {degat.map((ele) => (
+              <Image
+                key={ele}
+                source={{ uri: ele }}
+                style={{ width: 160, height: 160 }}
+              />
+            ))}
+          </View>
+        )}
         <Pressable onPress={() => navigation.navigate("ChoqA")}>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 20,
-              marginVertical: 20,
-              paddingVertical: 15,
-              color: "#ffffff",
-              backgroundColor: "red",
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: "#ffffff",
-            }}
-          >
-            Modifier
-          </Text>
+          <Text style={styles.mod}>Modifier</Text>
         </Pressable>
       </View>
       <View style={styles.buttonContainer}>
@@ -305,6 +307,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     marginVertical: 30,
+  },
+  mod: {
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 20,
+    paddingVertical: 15,
+    color: "#ffffff",
+    backgroundColor: "red",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+  },
+  desc: {
+    color: "#ffffff",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    height: 150,
+  },
+  imageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    gap: 20,
+    marginVertical: 20,
   },
 });
 

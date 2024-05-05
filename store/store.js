@@ -3,6 +3,7 @@ import vehiculeReducer from "../reducers/vehiculeReducer";
 import choixVehiculeReducer from "../reducers/choixVehiculeReducer";
 import assurance from "../reducers/assurance";
 import contrat from "../reducers/contrat";
+import accidentReducer from "../reducers/accidentReducer";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     choixVec: choixVehiculeReducer,
     assurance: assurance,
     contrat: contrat,
+    accident: accidentReducer,
   },
 });
 

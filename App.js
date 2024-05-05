@@ -50,6 +50,9 @@ import Croquis from "./Screens/Croquis";
 import CroquisSeul from "./Screens/CroquisSeul";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import Test from "./Screens/Test";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -291,6 +294,11 @@ export default function App() {
           <Stack.Screen
             name="CroquisSeul"
             component={CroquisSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Test"
+            component={Test}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   Pressable,
   Switch,
   TextInput,
+  Alert,
 } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
@@ -17,9 +18,30 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch } from "react-redux";
+import { setAccidentA } from "../reducers/accidentReducer";
+import { captureRef } from "react-native-view-shot";
 
 const ChoqA = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const [capturedImageUri, setCapturedImageUri] = useState("");
+  const takeScreenShot = async () => {
+    try {
+      const uri = await captureRef(viewRef, {
+        format: "jpg",
+        quality: 1,
+      });
+      setCapturedImageUri(uri);
+      return uri;
+    } catch (error) {
+      console.log("Oops, failed to capture!", error);
+      return null;
+    }
+  };
+  const viewRef = useRef();
+
   const [squares, setSquares] = useState(Array(12).fill(false));
   const backColor = (checked) => {
     if (checked) {
@@ -28,8 +50,8 @@ const ChoqA = () => {
     return {};
   };
   const [choc, setChoc] = useState(true);
-  const [damage, setDamage] = useState("");
-  const [images, setImages] = useState([]);
+  const [descreption, setDescreption] = useState("");
+  const [degat, setDegat] = useState([]);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -39,7 +61,7 @@ const ChoqA = () => {
     });
 
     if (!result.cancelled && result.assets) {
-      setImages([...images, result.assets[0].uri]);
+      setDegat([...degat, result.assets[0].uri]);
     }
   };
   const toggleSquare = (index) => {
@@ -67,6 +89,7 @@ const ChoqA = () => {
         </Text>
       </View>
       <View
+        ref={viewRef}
         style={{
           width: 360,
           height: 200,
@@ -294,9 +317,9 @@ const ChoqA = () => {
           </Text>
         </Pressable>
       </View>
-      {images.length > 0 && (
+      {degat.length > 0 && (
         <View style={styles.imageContainer}>
-          {images.map((ele) => (
+          {degat.map((ele) => (
             <Image
               key={ele}
               source={{ uri: ele }}
@@ -308,8 +331,8 @@ const ChoqA = () => {
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
-          value={damage}
-          onChangeText={(t) => setDamage(t)}
+          value={descreption}
+          onChangeText={(t) => setDescreption(t)}
           textAlignVertical="top"
           style={styles.descreption}
         />
@@ -321,7 +344,29 @@ const ChoqA = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoqArecap", { squares })}
+          onPress={async() => {
+            try {
+              const capturedImageUri = await takeScreenShot();
+              if (capturedImageUri) {
+                dispatch(
+                  setAccidentA({
+                    capturedImageUri,
+                    degat,
+                    squares,
+                    descreption,
+                  })
+                );
+                navigation.navigate("ChoqArecap");
+              } else {
+                Alert.alert(
+                  "Erreur",
+                  "Erreur lors de selectionner le point de choq initial"
+                );
+              }
+            } catch (error) {
+              console.log("An error occurred:", error);
+            }
+          }}
         />
       </View>
     </Screen>

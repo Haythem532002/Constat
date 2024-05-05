@@ -6,7 +6,6 @@ import Vehicule from "../Components/Vehicule";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import VehiculeIndication from "../Components/VehiculeIndication";
 import Title from "../Components/Title";
 const ChoixVehiculeSeul = () => {
   const navigation = useNavigation();
@@ -33,10 +32,12 @@ const ChoixVehiculeSeul = () => {
             }}
           >
             <Vehicule
-              text={require("../assets/Car2.png")}
+              text={require("../assets/Carred.png")}
               checked={checked.car}
               w={160}
               h={180}
+              wid={200}
+              heig={200}
             />
           </Pressable>
           <Pressable
@@ -50,10 +51,12 @@ const ChoixVehiculeSeul = () => {
             }}
           >
             <Vehicule
-              text={require("../assets/Bike13.png")}
+              text={require("../assets/moto.png")}
               checked={checked.bike}
               w={160}
               h={180}
+              wid={150}
+              heig={150}
             />
           </Pressable>
           <Pressable
@@ -67,10 +70,12 @@ const ChoixVehiculeSeul = () => {
             }}
           >
             <Vehicule
-              text={require("../assets/Truck.png")}
+              text={require("../assets/Truckred.png")}
               checked={checked.truck}
               w={160}
               h={180}
+              wid={140}
+              heig={140}
             />
           </Pressable>
         </View>

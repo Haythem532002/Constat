@@ -51,7 +51,7 @@ const ChoqB = () => {
   };
   return (
     <Screen>
-      <DynamicHeader screen="ChoqARecap" num={2} />
+      <DynamicHeader screen="ChoqArecap" num={2} />
       <VehiculeIndication letter="B" />
       <View
         style={{
@@ -317,7 +317,7 @@ const ChoqB = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoqARecap")}
+          onPress={() => navigation.navigate("ChoqArecap")}
         />
         <ButtonRouge
           title="Suivant"

@@ -1,80 +1,65 @@
-// import React, { useState, useRef } from "react";
-// import { StyleSheet, View, Image, Button } from "react-native";
-// import Signature from "react-native-signature-canvas";
+import React, { useRef, useState } from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { captureRef } from "react-native-view-shot";
 
-// const Sign = () => {
-//   const ref = useRef();
-//   const [draw, setDraw] = useState(null);
-//   const handleOK = (draw) => {
-//     setDraw(draw);
-//   };
-//   const handleEmpty = () => {
-//     console.log("Empty");
-//   };
-//   const style = `.m-signature-pad--footer
-//     .button {
-//       background-color: red;
-//       color: #FFF;
-//   }`;
-//   const handleUndo = () => {
-//     ref.current.undo();
-//   };
-//   return (
-//     <View style={{ flex: 1, padding: 5 }}>
-//       <View style={{ width: 380, height: 360, borderWidth: 1 }}>
-//         <Signature
-//           ref={ref}
-//           onOK={handleOK}
-//           onEmpty={handleEmpty}
-//           webStyle={style}
-//         />
-//       </View>
-//       <Button title="Undo" onPress={() => handleUndo()} />
-//       <Button
-//         title="Size"
-//         onPress={() => {
-//           ref.current.changePenSize(3, 3);
-//         }}
-//       />
-//       <Button
-//         title="red"
-//         onPress={() => {
-//           ref.current.changePenColor("#ff0000");
-//         }}
-//       />
-//       {draw ? (
-//         <Image
-//           resizeMode={"contain"}
-//           style={{ width: 360, height: 350 }}
-//           source={{ uri: draw }}
-//         />
-//       ) : null}
-//     </View>
-//   );
-// };
+export default function Test() {
+  const [capturedImageUri, setCapturedImageUri] = useState("");
 
-// const styles = StyleSheet.create({
-//   preview: {
-//     width: 335,
-//     height: 300,
-//     backgroundColor: "#F8F8F8",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 15,
-//     borderWidth: 1,
-//   },
-//   previewText: {
-//     color: "#FFF",
-//     fontSize: 14,
-//     height: 40,
-//     lineHeight: 40,
-//     paddingLeft: 10,
-//     paddingRight: 10,
-//     backgroundColor: "#69B2FF",
-//     width: 120,
-//     textAlign: "center",
-//     marginTop: 10,
-//   },
-// });
+  const takeScreenShot = async () => {
+    try {
+      const uri = await captureRef(viewRef, {
+        format: "jpg",
+        quality: 1,
+      });
+      setCapturedImageUri(uri);
+    } catch (error) {
+      console.log("Oops, failed to capture!", error);
+    }
+  };
+  const viewRef = useRef();
 
-// export default Sign;
+  return (
+    <View style={styles.container}>
+      <View ref={viewRef} style={styles.captureView}>
+        <Text>This is the view you want to capture</Text>
+        <Text>Haythem Khiari</Text>
+      </View>
+      {capturedImageUri && (
+        <View style={styles.capturedImageView}>
+          <Image
+            source={{ uri: capturedImageUri }}
+            style={styles.capturedImage}
+          />
+          <Text>This is captured</Text>
+        </View>
+      )}
+      <TouchableOpacity onPress={takeScreenShot}>
+        <Text>Take Screenshot</Text>
+      </TouchableOpacity>
+      <Text>Haythem Khiari</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "red",
+    height: 300,
+  },
+  captureView: {
+    width: 200,
+    height: 200,
+    backgroundColor: "lightblue",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  capturedImageView: {
+    marginTop: 10,
+    alignItems: "center",
+  },
+  capturedImage: {
+    width: 200,
+    height: 200,
+    resizeMode: "contain",
+  },
+});
