@@ -8,7 +8,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import VehiculeIndication from "../Components/VehiculeIndication";
 import { useDispatch } from "react-redux";
-import { setVec2 } from "../reducers/choixVehiculeReducer";
+import { setTypeB } from "../reducers/vehiculeReducer";
 const ChoixVehiculeB = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -20,8 +20,10 @@ const ChoixVehiculeB = () => {
   });
   return (
     <Screen>
-      <DynamicHeader screen="ModeSaisie" num={1} />
-      <VehiculeIndication letter="B" />
+      <DynamicHeader screen="ChoixVehiculeA" num={1} />
+      <View style={{ marginTop: 10 }}>
+        <VehiculeIndication letter="B" />
+      </View>
       <View style={styles.container}>
         <Pressable
           onPress={() => {
@@ -53,7 +55,7 @@ const ChoixVehiculeB = () => {
           }}
         >
           <Vehicule
-            text={require("../assets/moto.png")}
+            text={require("../assets/electric.png")}
             checked={checked.bike}
             w={160}
             h={180}
@@ -89,7 +91,7 @@ const ChoixVehiculeB = () => {
         <ButtonRouge
           title="Suivant"
           onPress={() => {
-            dispatch(setVec2(vehicule));
+            dispatch(setTypeB(vehicule));
             if (vehicule != "") {
               navigation.navigate("TémoinB");
             } else {
@@ -112,12 +114,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 20,
+    marginTop: 10,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 160,
+    paddingTop: 150,
   },
 });
 

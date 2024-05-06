@@ -10,7 +10,7 @@ import { Alert } from "react-native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useDispatch } from "react-redux";
-import { setTemoin2 } from "../reducers/choixVehiculeReducer";
+import { ajoutTémoin } from "../reducers/temoinsReducer";
 
 const AjoutTémoinB = () => {
   const navigation = useNavigation();
@@ -52,7 +52,7 @@ const AjoutTémoinB = () => {
           title="Suivant"
           onPress={() => {
             if (validate()) {
-              dispatch(setTemoin2({ fullName, num, adresse, code, ville }));
+              dispatch(ajoutTémoin({ fullName, num, adresse, code, ville }));
               navigation.navigate("TémoinB");
             } else {
               Alert.alert(

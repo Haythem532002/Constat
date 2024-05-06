@@ -51,7 +51,7 @@ const ChoixVehiculeSeul = () => {
             }}
           >
             <Vehicule
-              text={require("../assets/moto.png")}
+              text={require("../assets/electric.png")}
               checked={checked.bike}
               w={160}
               h={180}

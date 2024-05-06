@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import React, { useState, useRef } from "react";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -8,10 +8,13 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Signature from "react-native-signature-canvas";
+import { useDispatch } from "react-redux";
+import { setSignatureA } from "../reducers/croquisReducer";
 
 const SignatureA = () => {
   const navigation = useNavigation();
   const [signature, setSign] = useState(null);
+  const dispatch = useDispatch();
 
   const handleOK = (signature) => {
     setSign(signature);
@@ -53,7 +56,10 @@ const SignatureA = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("SignatureB")}
+          onPress={() => {
+            dispatch(setSignatureA(signature));
+            navigation.navigate("SignatureB");
+          }}
         />
       </View>
     </Screen>

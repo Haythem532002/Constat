@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -11,22 +11,21 @@ import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import VehiculeIndication from "../Components/VehiculeIndication";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useRoute } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+
 const ChoqBrecap = () => {
   const navigation = useNavigation();
-  let { squares } = useRoute().params;
-  if (typeof squares === "undefined") {
-    squares = Array(12).fill(false);
-  }
-  const backColor = (checked) => {
-    if (checked) {
-      return { backgroundColor: "red" };
-    }
-    return {};
-  };
+  const { nomB, prenomB, isConB, numTelB } = useSelector(
+    (state) => state.assure
+  );
+  const { nomConB, prenomConB, emailConB } = useSelector(
+    (state) => state.conducteur
+  );
+  const { accidentB } = useSelector((state) => state.accident);
+  const { capturedImageUri, degat, descreption } = accidentB;
   return (
     <Screen>
       <DynamicHeader screen="ChoqB" num={2} />
@@ -34,236 +33,60 @@ const ChoqBrecap = () => {
       <Text style={styles.textColor}>Informations renseignés : </Text>
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Numéro de Contrat</Text>
+        <Text style={styles.textColor}>
+          {nomB != "" && prenomB != ""
+            ? nomB + " " + prenomB
+            : "Nom et Prénom de l'assuré"}
+        </Text>
       </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Nom et Prénom de l'assuré(e)</Text>
-      </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Nom et Prénom du conductuer</Text>
-      </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Numéro de téléphone</Text>
-      </View>
-      <View
-        style={{
-          width: 360,
-          height: 200,
-          justifyContent: "center",
-          alignItems: "flex-start",
-          backgroundColor: "#C4C4C5",
-          borderRadius: 8,
-        }}
-      >
-        <View
-          style={{
-            width: "100%",
-            height: "100%",
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[0]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[1]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 100,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[2]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[3]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[4]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[5]),
-            ]}
-          />
-          <Pressable
-            style={{
-              width: 60,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={{
-              width: 100,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={{
-              width: 70,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[6]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[7]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[8]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 100,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[9]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[10]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[11]),
-            ]}
-          />
+      {!isConB && (
+        <View style={styles.line}>
+          <Icon name="circle" size={10} color="#ffffff" />
+          <Text style={styles.textColor}>
+            {nomConB != "" && prenomConB != ""
+              ? nomConB + " " + nomConB
+              : "Nom et Prénom de conducteur"}
+          </Text>
         </View>
-        <Image
-          source={require("../assets/GrayCar2.png")}
-          style={{
-            width: 300,
-            height: 100,
-            position: "absolute",
-            marginLeft: 30,
-          }}
-          resizeMode="contain"
-        />
+      )}
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>
+          {numTelB != "" ? numTelB : "Numéro de téléphonde de l'assuré"}
+        </Text>
       </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>
+          {emailConB != "" ? emailConB : "E-mail du conducteur"}
+        </Text>
+      </View>
+      <Image
+        source={{ uri: capturedImageUri }}
+        style={{ width: 365, height: 200, borderRadius: 8, marginTop: 10 }}
+      />
+      {degat.length > 0 && (
+        <View style={styles.imageContainer}>
+          {degat.map((ele) => (
+            <Image
+              key={ele}
+              source={{ uri: ele }}
+              style={{ width: 160, height: 160 }}
+            />
+          ))}
+        </View>
+      )}
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
           textAlignVertical="top"
-          style={{
-            color: "#ffffff",
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: "#ffffff",
-            paddingVertical: 15,
-            paddingHorizontal: 15,
-            height: 150,
-          }}
+          style={[styles.desc, { fontSize: 18 }]}
+          value={descreption}
+          multiline
+          editable={false}
         />
         <Pressable onPress={() => navigation.navigate("ChoqB")}>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 20,
-              marginVertical: 20,
-              paddingVertical: 15,
-              color: "#ffffff",
-              backgroundColor: "red",
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: "#ffffff",
-            }}
-          >
-            Modifier
-          </Text>
+          <Text style={styles.mod}>Modifier</Text>
         </Pressable>
       </View>
       <View style={styles.buttonContainer}>
@@ -308,6 +131,34 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     marginVertical: 30,
+  },
+  mod: {
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 20,
+    paddingVertical: 15,
+    color: "#ffffff",
+    backgroundColor: "red",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+  },
+  desc: {
+    color: "#ffffff",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#ffffff",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    height: 150,
+  },
+  imageContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    gap: 20,
+    marginVertical: 20,
   },
 });
 

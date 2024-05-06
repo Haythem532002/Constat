@@ -7,11 +7,15 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import VehiculeIndication from "../Components/VehiculeIndication";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import Label from "../Components/Label";
 import Input from "../Components/Input";
-import { useDispatch } from "react-redux";
-import { setAssuranceVec1 } from "../reducers/assurance";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAgenceAssurA,
+  setPoliceAssurA,
+  setVecAssurA,
+} from "../reducers/assuranceReducer";
+import { setImmatriculationA, setMarqueA } from "../reducers/vehiculeReducer";
 
 const Titre = ({ text }) => {
   return (
@@ -23,11 +27,15 @@ const Titre = ({ text }) => {
 
 const InfoAssuranceA = () => {
   const navigation = useNavigation();
-  const [assurance, setAssurance] = useState("");
-  const [police, setPolice] = useState("");
-  const [agence, setAgence] = useState("");
-  const [marque, setMarque] = useState("");
-  const [immatriculation, setImmatriculation] = useState("");
+  const { vecAssurA, policeAssurA, agenceAssurA } = useSelector(
+    (state) => state.assurance
+  );
+  const { marqueA, immatriculationA } = useSelector((state) => state.vehicule);
+  const [assurance, setAssurance] = useState(vecAssurA);
+  const [police, setPolice] = useState(policeAssurA);
+  const [agence, setAgence] = useState(agenceAssurA);
+  const [marque, setMarque] = useState(marqueA);
+  const [immatriculation, setImmatriculation] = useState(immatriculationA);
   const dispatch = useDispatch();
   return (
     <Screen>
@@ -39,18 +47,22 @@ const InfoAssuranceA = () => {
         <Label text="Vehicule assuré par" required={true} />
         <Input value={assurance} onChangeText={(a) => setAssurance(a)} />
         <Label text="Police d'Assurance N°" required={true} />
-        <Input value={police} onChangeText={(a) => setPolice(a)} />
+        <Input
+          value={police}
+          onChangeText={(a) => setPolice(a)}
+          type="numeric"
+        />
         <Label text="Agence" required={true} />
         <Input value={agence} onChangeText={(a) => setAgence(a)} />
         <View style={{ marginVertical: 10 }}></View>
         <Titre text="Identité de Véhicule" />
-        <Label text="Marque" required={true} />
-        <Input value={marque} onChangeText={(i) => setMarque(i)} />
         <Label text="Immatriculation" required={true} />
         <Input
           value={immatriculation}
           onChangeText={(i) => setImmatriculation(i)}
         />
+        <Label text="Marque" />
+        <Input value={marque} onChangeText={(i) => setMarque(i)} />
       </View>
       <View style={styles.buttonContainer}>
         <ButtonBlanc
@@ -61,10 +73,17 @@ const InfoAssuranceA = () => {
           title="Suivant"
           onPress={() => {
             if (assurance != "" && immatriculation != "") {
-              let box = {};
-              box["assurance"] = assurance;
-              box["immatriculation"] = immatriculation;
-              dispatch(setAssuranceVec1(box));
+              dispatch(setVecAssurA(assurance));
+              dispatch(setImmatriculationA(immatriculation));
+              if (police != "") {
+                dispatch(setPoliceAssurA(police));
+              }
+              if (agence != "") {
+                dispatch(setAgenceAssurA(agence));
+              }
+              if (marque != "") {
+                dispatch(setMarqueA(marque));
+              }
               navigation.navigate("InfoAssurance");
             } else {
               Alert.alert(

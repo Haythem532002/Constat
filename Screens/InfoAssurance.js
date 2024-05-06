@@ -11,21 +11,10 @@ import { useSelector } from "react-redux";
 
 const InfoAssurance = () => {
   const navigation = useNavigation();
-  const { AssuranceVec1 } = useSelector((state) => state.assurance);
-  const { AssuranceVec2 } = useSelector((state) => state.assurance);
-  let assurance1 = "";
-  let immat1 = "";
-  if (AssuranceVec1 != null) {
-    assurance1 = AssuranceVec1.assurance;
-    immat1 = AssuranceVec1.immatriculation;
-  }
-  let assurance2 = "";
-  let immat2 = "";
-  if (AssuranceVec2 != null) {
-    assurance2 = AssuranceVec2.assurance;
-    immat2 = AssuranceVec2.immatriculation;
-  }
-
+  const { vecAssurA, vecAssurB } = useSelector((state) => state.assurance);
+  const { immatriculationA, immatriculationB } = useSelector(
+    (state) => state.vehicule
+  );
   return (
     <Screen>
       <DynamicHeader num={1} screen="TémoinB" />
@@ -33,14 +22,14 @@ const InfoAssurance = () => {
       <BoxAssurance
         letter="A"
         handle={() => navigation.navigate("InfoAssuranceA")}
-        assurance={assurance1}
-        immat={immat1}
+        assurance={vecAssurA}
+        immat={immatriculationA}
       />
       <BoxAssurance
         letter="B"
         handle={() => navigation.navigate("InfoAssuranceB")}
-        assurance={assurance2}
-        immat={immat2}
+        assurance={vecAssurB}
+        immat={immatriculationB}
       />
       <View style={styles.buttonContainer}>
         <ButtonBlanc

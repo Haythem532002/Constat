@@ -15,26 +15,22 @@ const Renseigner = () => {
 };
 
 const BoxContrat = ({ letter, handle, contrat }) => {
-  console.log(contrat);
   return (
     <View style={styles.container}>
       <VehiculeIndication letter={letter} />
       <Text style={styles.textColor}>Informations renseignés : </Text>
-      {/* <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>
-          {contrat != null ? contrat.numeroContrat : "Numéro de Contrat"}
-        </Text>
-      </View> */}
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
         <Text style={styles.textColor}>
-          {contrat != null
-            ? contrat.nomAssure + " " + contrat.prenomAssure
+          {contrat != null && contrat.nom != "" && contrat.prenom != ""
+            ? contrat.nom + " " + contrat.prenom
             : "Nom et Prénom de l'assuré(e)"}
         </Text>
       </View>
-      {contrat != null && contrat.isAssureConducteur == false ? (
+      {contrat != null &&
+      contrat.isAssureConducteur == false &&
+      contrat.nomConducteur != "" &&
+      contrat.prenomConducteur != "" ? (
         <View style={styles.line}>
           <Icon name="circle" size={10} color="#ffffff" />
           <Text style={styles.textColor}>
@@ -42,7 +38,7 @@ const BoxContrat = ({ letter, handle, contrat }) => {
           </Text>
         </View>
       ) : null}
-      {contrat == null && (
+      {contrat.nomConducteur == "" && contrat.prenomConducteur == "" && (
         <View style={styles.line}>
           <Icon name="circle" size={10} color="#ffffff" />
           <Text style={styles.textColor}>Nom et Prénom de conducteur</Text>
@@ -51,10 +47,14 @@ const BoxContrat = ({ letter, handle, contrat }) => {
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
         <Text style={styles.textColor}>
-          {contrat != null ? contrat.numeroTelAssure : "Numéro de téléphone"}
+          {contrat != null && contrat.numeroTelAssure != ""
+            ? contrat.numeroTelAssure
+            : "Numéro de téléphone"}
         </Text>
       </View>
-      {contrat != null && contrat.isAssureConducteur == false ? (
+      {contrat != null &&
+      contrat.isAssureConducteur == false &&
+      contrat.permis != "" ? (
         <View style={styles.line}>
           <Icon name="circle" size={10} color="#ffffff" />
           <Text style={styles.textColor}>{contrat.permis}</Text>
@@ -75,12 +75,33 @@ const BoxContrat = ({ letter, handle, contrat }) => {
 
 const Contrat = () => {
   const navigation = useNavigation();
-  const { contratA } = useSelector((state) => state.contrat);
-  const { contratB } = useSelector((state) => state.contrat);
+  const { nomA, nomB, prenomA, prenomB, numTelA, numTelB, isConA, isConB } =
+    useSelector((state) => state.assure);
+  const { nomConA, nomConB, prenomConA, prenomConB, permisConA, permisConB } =
+    useSelector((state) => state.conducteur);
+  const contratA = {
+    nom: nomA,
+    prenom: prenomA,
+    numeroTelAssure: numTelA,
+    isAssureConducteur: isConA,
+    nomConducteur: nomConA,
+    prenomConducteur: prenomConA,
+    permis: permisConA,
+  };
+  const contratB = {
+    nom: nomB,
+    prenom: prenomB,
+    numeroTelAssure: numTelB,
+    isAssureConducteur: isConB,
+    nomConducteur: nomConB,
+    prenomConducteur: prenomConB,
+    permis: permisConB,
+  };
+
   return (
     <Screen>
       <DynamicHeader screen="InfoAssurance" num={2} />
-      <Title text="Informations Sur L'assuré et Conducteur"/>
+      <Title text="Informations Sur L'assuré et Conducteur" />
       <BoxContrat
         letter="A"
         contrat={contratA}

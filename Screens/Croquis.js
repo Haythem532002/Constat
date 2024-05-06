@@ -10,13 +10,16 @@ import Signature from "react-native-signature-canvas";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setCroquis } from "../reducers/croquisReducer";
 
 const Croquis = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const ref = useRef();
-  const [draw, setDraw] = useState(null);
-  const handleOK = (draw) => {
-    setDraw(draw);
+  const [croquis, setDraw] = useState(null);
+  const handleOK = (croquis) => {
+    setDraw(croquis);
   };
   const handleEmpty = () => {
     console.log("Empty");
@@ -90,7 +93,10 @@ const Croquis = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("InfoSupp")}
+          onPress={() => {
+            dispatch(setCroquis(croquis));
+            navigation.navigate("InfoSupp");
+          }}
         />
       </View>
     </Screen>

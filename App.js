@@ -52,15 +52,13 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import Test from "./Screens/Test";
 
-
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ChoqA">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Home"
             component={Home}

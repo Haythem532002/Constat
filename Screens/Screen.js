@@ -9,7 +9,7 @@ const Screen = ({ children }) => {
     </ScrollView>
   );
 };
-
+// #151B26
 const styles = StyleSheet.create({
   container: {
     flex: 1,

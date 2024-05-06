@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
@@ -6,6 +6,7 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../Components/Title";
+import { useSelector } from "react-redux";
 
 const Croquis = ({ text, checked, w, h, desc }) => {
   const colorBack = () => {

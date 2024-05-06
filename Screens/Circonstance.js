@@ -6,6 +6,12 @@ import Title from "../Components/Title";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import {
+  setCirconstanceA,
+  setCirconstanceB,
+} from "../reducers/circonstancesReducer";
+
 const Photo = ({ letter }) => {
   const backColor = (letter) => {
     if (letter === "A") {
@@ -109,6 +115,7 @@ const Line = () => {
 
 const Circonstance = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [boxStatesA, setBoxStatesA] = useState({
     stationnement: false,
     quittaitStationnement: false,
@@ -557,11 +564,15 @@ const Circonstance = () => {
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoqBreacp")}
+          onPress={() => navigation.navigate("ChoqBrecap")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("Accident")}
+          onPress={() => {
+            dispatch(setCirconstanceA(boxStatesA));
+            dispatch(setCirconstanceB(boxStatesB));
+            navigation.navigate("Accident");
+          }}
         />
       </View>
     </Screen>

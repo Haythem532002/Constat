@@ -19,16 +19,13 @@ import { useSelector } from "react-redux";
 const ChoqArecap = () => {
   const navigation = useNavigation();
   const { accidentA } = useSelector((state) => state.accident);
-  const { capturedImageUri, degat, squares, descreption } = accidentA;
-  const backColor = (checked) => {
-    if (checked) {
-      return { backgroundColor: "red" };
-    }
-    return {};
-  };
-  useEffect(() => {
-    console.log(accidentA);
-  }, []);
+  const { capturedImageUri, degat, descreption } = accidentA;
+  const { nomA, prenomA, isConA, numTelA } = useSelector(
+    (state) => state.assure
+  );
+  const { nomConA, prenomConA, emailConA } = useSelector(
+    (state) => state.conducteur
+  );
   return (
     <Screen>
       <DynamicHeader screen="ChoqA" num={2} />
@@ -36,231 +33,58 @@ const ChoqArecap = () => {
       <Text style={styles.textColor}>Informations renseignés : </Text>
       <View style={styles.line}>
         <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Numéro de Contrat</Text>
+        <Text style={styles.textColor}>
+          {nomA != "" && prenomA != ""
+            ? nomA + " " + prenomA
+            : "Nom et Prénom de l'assuré"}
+        </Text>
       </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Nom et Prénom de l'assuré(e)</Text>
-      </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Nom et Prénom du conductuer</Text>
-      </View>
-      <View style={styles.line}>
-        <Icon name="circle" size={10} color="#ffffff" />
-        <Text style={styles.textColor}>Numéro de téléphone</Text>
-      </View>
-      <View
-        style={{
-          width: 360,
-          height: 200,
-          justifyContent: "center",
-          alignItems: "flex-start",
-          backgroundColor: "#C4C4C5",
-          borderRadius: 8,
-        }}
-      >
-        <View
-          style={{
-            width: "100%",
-            height: "100%",
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[0]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[1]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 100,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[2]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[3]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[4]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[5]),
-            ]}
-          />
-          <Pressable
-            style={{
-              width: 60,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={{
-              width: 100,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={{
-              width: 70,
-              height: 70,
-              borderWidth: 1,
-              borderStyle: "dashed",
-            }}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 70,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[6]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[7]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 60,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[8]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 100,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[9]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[10]),
-            ]}
-          />
-          <Pressable
-            style={[
-              {
-                width: 70,
-                height: 60,
-                borderWidth: 1,
-                borderStyle: "dashed",
-              },
-              backColor(squares[11]),
-            ]}
-          />
+      {!isConA && (
+        <View style={styles.line}>
+          <Icon name="circle" size={10} color="#ffffff" />
+          <Text style={styles.textColor}>
+            {nomConA != "" && prenomConA != ""
+              ? nomConA + " " + nomConA
+              : "Nom et Prénom de conducteur"}
+          </Text>
         </View>
-        <Image
-          source={require("../assets/GrayCar2.png")}
-          style={{
-            width: 300,
-            height: 100,
-            position: "absolute",
-            marginLeft: 30,
-          }}
-          resizeMode="contain"
-        />
+      )}
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>
+          {numTelA != "" ? numTelA : "Numéro de téléphonde de l'assuré"}
+        </Text>
       </View>
+      <View style={styles.line}>
+        <Icon name="circle" size={10} color="#ffffff" />
+        <Text style={styles.textColor}>
+          {emailConA != "" ? emailConA : "E-mail du conducteur"}
+        </Text>
+      </View>
+      <Image
+        source={{ uri: capturedImageUri }}
+        style={{ width: 365, height: 200, borderRadius: 8, marginTop: 10 }}
+      />
+      {degat.length > 0 && (
+        <View style={styles.imageContainer}>
+          {degat.map((ele) => (
+            <Image
+              key={ele}
+              source={{ uri: ele }}
+              style={{ width: 160, height: 160 }}
+            />
+          ))}
+        </View>
+      )}
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
           textAlignVertical="top"
-          style={styles.desc}
+          style={[styles.desc, { fontSize: 18 }]}
           value={descreption}
+          multiline
           editable={false}
         />
-        {capturedImageUri && (
-          <Image
-            source={{ uri: capturedImageUri }}
-            style={{ width: 365, height: 200, borderRadius: 8 }}
-          />
-        )}
-        {degat.length > 0 && (
-          <View style={styles.imageContainer}>
-            {degat.map((ele) => (
-              <Image
-                key={ele}
-                source={{ uri: ele }}
-                style={{ width: 160, height: 160 }}
-              />
-            ))}
-          </View>
-        )}
         <Pressable onPress={() => navigation.navigate("ChoqA")}>
           <Text style={styles.mod}>Modifier</Text>
         </Pressable>

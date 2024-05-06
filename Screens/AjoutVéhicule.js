@@ -85,12 +85,12 @@ const AjoutVéhicule = () => {
             }}
           >
             <Vehicule
-              text={require("../assets/moto.png")}
+              text={require("../assets/electric.png")}
               checked={checked.bike}
               w={160}
               h={180}
-              wid={150}
-              heig={150}
+              wid={170}
+              heig={170}
             />
           </Pressable>
           <Pressable

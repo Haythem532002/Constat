@@ -1,12 +1,20 @@
 import React from "react";
 import { StyleSheet, TextInput } from "react-native";
 
-const Input = ({ value, onChangeText, style }) => {
+const Input = ({ value, onChangeText, style, editable, type }) => {
+  if (editable === null) {
+    editable = true;
+  }
+  if (type === null) {
+    type = "default";
+  }
   return (
     <TextInput
       style={[styles.input, style]}
       value={value}
       onChangeText={onChangeText}
+      editable={editable}
+      keyboardType={type}
     />
   );
 };

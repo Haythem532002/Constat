@@ -2,13 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   accidentA: {
-    capturedImageUri: "",
+    capturedImageUri:
+      "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FFront-End-dc24ea75-9305-4250-bc0c-6731d1f9d9c3/ReactNative-snapshot-image4900603920861560905.jpg",
     degat: [],
     squares: Array(12).fill(false),
     descreption: "",
   },
   accidentB: {
-    capturedImageUri: "",
+    capturedImageUri:
+      "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FFront-End-dc24ea75-9305-4250-bc0c-6731d1f9d9c3/ReactNative-snapshot-image4900603920861560905.jpg",
     degat: [],
     squares: Array(12).fill(false),
     descreption: "",

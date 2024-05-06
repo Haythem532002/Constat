@@ -6,12 +6,9 @@ import Title from "../Components/Title";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import VehiculeIndication from "../Components/VehiculeIndication";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import Label from "../Components/Label";
 import Input from "../Components/Input";
 import { useDispatch } from "react-redux";
-import { setAssuranceVec1 } from "../reducers/assurance";
 
 const Titre = ({ text }) => {
   return (
@@ -60,10 +57,6 @@ const InfoAssuranceSeul = () => {
           title="Suivant"
           onPress={() => {
             if (assurance != "" && immatriculation != "") {
-              let box = {};
-              box["assurance"] = assurance;
-              box["immatriculation"] = immatriculation;
-              dispatch(setAssuranceVec1(box));
               navigation.navigate("ContratSeul");
             } else {
               Alert.alert(
@@ -87,7 +80,7 @@ const styles = StyleSheet.create({
     borderColor: "#ffffff",
     borderRadius: 8,
     paddingBottom: 80,
-    paddingVertical:20
+    paddingVertical: 20,
   },
   buttonContainer: {
     flexDirection: "row",

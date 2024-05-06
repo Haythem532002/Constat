@@ -18,15 +18,22 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
-import { useDispatch } from "react-redux";
-import { setAccidentA } from "../reducers/accidentReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { accidentA, setAccidentA } from "../reducers/accidentReducer";
 import { captureRef } from "react-native-view-shot";
 
 const ChoqA = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { accidentA } = useSelector((state) => state.accident);
 
-  const [capturedImageUri, setCapturedImageUri] = useState("");
+  const [capturedImageUri, setCapturedImageUri] = useState(
+    accidentA.capturedImageUri
+  );
+  const [choc, setChoc] = useState(true);
+  const [descreption, setDescreption] = useState(accidentA.descreption);
+  const [degat, setDegat] = useState(accidentA.degat);
+  const [squares, setSquares] = useState(accidentA.squares);
   const takeScreenShot = async () => {
     try {
       const uri = await captureRef(viewRef, {
@@ -42,16 +49,13 @@ const ChoqA = () => {
   };
   const viewRef = useRef();
 
-  const [squares, setSquares] = useState(Array(12).fill(false));
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
     }
     return {};
   };
-  const [choc, setChoc] = useState(true);
-  const [descreption, setDescreption] = useState("");
-  const [degat, setDegat] = useState([]);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -334,7 +338,8 @@ const ChoqA = () => {
           value={descreption}
           onChangeText={(t) => setDescreption(t)}
           textAlignVertical="top"
-          style={styles.descreption}
+          multiline
+          style={[styles.descreption, { fontSize: 18 }]}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -344,7 +349,7 @@ const ChoqA = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={async() => {
+          onPress={async () => {
             try {
               const capturedImageUri = await takeScreenShot();
               if (capturedImageUri) {

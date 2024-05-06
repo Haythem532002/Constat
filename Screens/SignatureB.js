@@ -8,9 +8,12 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Signature from "react-native-signature-canvas";
+import { useDispatch } from "react-redux";
+import { setSignatureB } from "../reducers/croquisReducer";
 
 const SignatureB = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [signature, setSign] = useState(null);
 
   const handleOK = (signature) => {
@@ -30,7 +33,7 @@ const SignatureB = () => {
     <Screen>
       <DynamicHeader screen="SignatureA" num={6} />
       <Title text="Signature" />
-      <View style={{marginTop:-20}}>
+      <View style={{ marginTop: -20 }}>
         <VehiculeIndication letter="B" />
       </View>
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
@@ -53,7 +56,10 @@ const SignatureB = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("SignatureB")}
+          onPress={() => {
+            dispatch(setSignatureB(signature));
+            navigation.navigate("SignatureB");
+          }}
         />
       </View>
     </Screen>

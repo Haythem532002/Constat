@@ -8,12 +8,12 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { setInfoSupp } from "../reducers/croquisReducer";
 
 const InfoSupp = () => {
   const navigation = useNavigation();
-  const [degat, setDegat] = useState(false);
-  const toggleSwitch = () => setDegat((prev) => !prev);
-
+  const dispatch = useDispatch();
   const [images, setImages] = useState([]);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -72,7 +72,12 @@ const InfoSupp = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ObservationA")}
+          onPress={() => {
+            if (images.length > 0) {
+              dispatch(setInfoSupp(images));
+            }
+            navigation.navigate("ObservationA");
+          }}
         />
       </View>
     </Screen>

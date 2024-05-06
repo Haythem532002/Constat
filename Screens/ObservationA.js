@@ -7,9 +7,13 @@ import VehiculeIndication from "../Components/VehiculeIndication";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setObservationA } from "../reducers/croquisReducer";
+
 const ObservationA = () => {
   const navigation = useNavigation();
   const [commentaire, setCommentaire] = useState("");
+  const dispatch = useDispatch();
   return (
     <Screen>
       <DynamicHeader screen="InfoSupp" num={5} />
@@ -23,18 +27,9 @@ const ObservationA = () => {
       <TextInput
         value={commentaire}
         onChangeText={(t) => setCommentaire(t)}
+        multiline
         placeholderTextColor="#ffffff"
-        style={{
-          height: 200,
-          textAlignVertical: "top",
-          paddingHorizontal: 20,
-          paddingVertical: 8,
-          borderColor: "#ffffff",
-          borderWidth: 1,
-          borderRadius: 8,
-          fontSize: 18,
-          color: "#ffffff",
-        }}
+        style={styles.text}
         placeholder="Commentaire(optionnel)"
       />
       <View style={styles.buttonContainer}>
@@ -44,7 +39,10 @@ const ObservationA = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ObservationB")}
+          onPress={() => {
+            dispatch(setObservationA(commentaire));
+            navigation.navigate("ObservationB");
+          }}
         />
       </View>
     </Screen>
@@ -52,17 +50,22 @@ const ObservationA = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2c3e50",
-  },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     paddingTop: 230,
+  },
+  text: {
+    height: 200,
+    textAlignVertical: "top",
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderColor: "#ffffff",
+    borderWidth: 1,
+    borderRadius: 8,
+    fontSize: 18,
+    color: "#ffffff",
   },
 });
 

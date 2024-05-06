@@ -9,26 +9,45 @@ import Input from "../Components/Input";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { setContratA } from "../reducers/contrat";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAdresseA,
+  setIsConA,
+  setNomA,
+  setNumTelA,
+  setPrenomA,
+} from "../reducers/assureReducer";
+import {
+  setAdresseConA,
+  setEmailConA,
+  setNomConA,
+  setPermisConA,
+  setPrenomConA,
+} from "../reducers/conducteurReducer";
 
 const ContratA = () => {
   const navigation = useNavigation();
 
-  const [nomAssure, setNomAssure] = useState("");
-  const [prenomAssure, setPrenomAssure] = useState("");
-  const [numeroTelephone, setNumeroTelephone] = useState("");
-  const [codePostal, setCodePostal] = useState("");
-  const [isAssureConducteur, setIsAssureConducteur] = useState(false);
-  const [nomConducteur, setNomConducteur] = useState("");
-  const [prenomConducteur, setPrenomConducteur] = useState("");
-  const [permis, setPermis] = useState("");
-  const [email, setEmail] = useState("");
+  const { nomA, prenomA, numTelA, isConA, adresseA } = useSelector(
+    (state) => state.assure
+  );
+  const { nomConA, prenomConA, permisConA, adresseConA, emailConA } =
+    useSelector((state) => state.conducteur);
+
+  const [nomAssure, setNomAssure] = useState(nomA);
+  const [prenomAssure, setPrenomAssure] = useState(prenomA);
+  const [numeroTelephone, setNumeroTelephone] = useState(numTelA);
+  const [adrA, setAdrA] = useState(adresseA);
+  const [isAssureConducteur, setIsAssureConducteur] = useState(isConA);
+  const [nomConducteur, setNomConducteur] = useState(nomConA);
+  const [prenomConducteur, setPrenomConducteur] = useState(prenomConA);
+  const [adrC, setAdrC] = useState(adresseConA);
+  const [permis, setPermis] = useState(permisConA);
+  const [email, setEmail] = useState(emailConA);
 
   const toggleSwitch = () => setIsAssureConducteur((prev) => !prev);
 
   const dispatch = useDispatch();
-  const obj = {};
 
   return (
     <Screen>
@@ -36,13 +55,17 @@ const ContratA = () => {
       <Title text="Informations Sur L'assuré et Conducteur" />
       <VehiculeIndication letter="A" />
       <Label text="Nom de l'assuré" required={true} />
-      <Input value={nomAssure} onChangeText={setNomAssure} />
+      <Input value={nomAssure} onChangeText={(n) => setNomAssure(n)} />
       <Label text="Prénom de l'assuré" required={true} />
-      <Input value={prenomAssure} onChangeText={setPrenomAssure} />
+      <Input value={prenomAssure} onChangeText={(p) => setPrenomAssure(p)} />
       <Label text="Numéro de téléphone" required={true} />
-      <Input value={numeroTelephone} onChangeText={setNumeroTelephone} />
-      <Label text="Code Postal" />
-      <Input value={codePostal} onChangeText={setCodePostal} />
+      <Input
+        value={numeroTelephone}
+        onChangeText={(n) => setNumeroTelephone(n)}
+        type="numeric"
+      />
+      <Label text="Adresse" />
+      <Input value={adrA} onChangeText={(a) => setAdrA(a)} />
       <View
         style={{ alignItems: "center", flexDirection: "row", marginTop: 10 }}
       >
@@ -57,15 +80,23 @@ const ContratA = () => {
       {!isAssureConducteur && (
         <View>
           <Label text="Nom de conducteur" required={true} />
-          <Input value={nomConducteur} onChangeText={setNomConducteur} />
+          <Input
+            value={nomConducteur}
+            onChangeText={(c) => setNomConducteur(c)}
+          />
           <Label text="Prénom de conducteur" required={true} />
-          <Input value={prenomConducteur} onChangeText={setPrenomConducteur} />
+          <Input
+            value={prenomConducteur}
+            onChangeText={(pc) => setPrenomConducteur(pc)}
+          />
+          <Label text="Adresse" />
+          <Input value={adrC} onChangeText={(ac) => setAdrC(ac)} />
         </View>
       )}
       <Label text="Permis de conduire" required={true} />
-      <Input value={permis} onChangeText={setPermis} />
+      <Input value={permis} onChangeText={(p) => setPermis(p)} />
       <Label text="E-mail" required={true} />
-      <Input value={email} onChangeText={setEmail} />
+      <Input value={email} onChangeText={(e) => setEmail(e)} />
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
@@ -75,17 +106,18 @@ const ContratA = () => {
           title="Suivant"
           onPress={() => {
             if (nomAssure && prenomAssure && numeroTelephone) {
-              obj["nomAssure"] = nomAssure;
-              obj["prenomAssure"] = prenomAssure;
-              obj["numeroTelAssure"] = numeroTelephone;
-              obj["codePostal"] = codePostal;
-              obj["isAssureConducteur"] = isAssureConducteur;
+              dispatch(setNomA(nomAssure));
+              dispatch(setPrenomA(prenomAssure));
+              dispatch(setNumTelA(numeroTelephone));
+              dispatch(setAdresseA(adrA));
+              dispatch(setPermisConA(permis));
+              dispatch(setEmailConA(email));
               if (!isAssureConducteur) {
-                if (nomConducteur && prenomConducteur && permis) {
-                  obj["nomConducteur"] = nomConducteur;
-                  obj["prenomConducteur"] = prenomConducteur;
-                  obj["permis"] = permis;
-                  dispatch(setContratA(obj));
+                dispatch(setIsConA(false));
+                if (nomConducteur && prenomConducteur && permis && email) {
+                  dispatch(setNomConA(nomConducteur));
+                  dispatch(setPrenomConA(prenomConducteur));
+                  dispatch(setAdresseConA(adrC));
                   navigation.navigate("Contrat");
                 } else {
                   Alert.alert(
@@ -96,9 +128,10 @@ const ContratA = () => {
                   );
                 }
               } else {
-                obj["nomConducteur"] = nomAssure;
-                obj["prenomConducteur"] = prenomAssure;
-                dispatch(setContratA(obj));
+                dispatch(setIsConA(true));
+                dispatch(setNomConA(nomAssure));
+                dispatch(setPrenomConA(prenomAssure));
+                dispatch(setAdresseConA(adrA));
                 navigation.navigate("Contrat");
               }
             } else {
