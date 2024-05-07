@@ -10,11 +10,12 @@ import temoinsReducer from "../reducers/temoinsReducer";
 import assureReducer from "../reducers/assureReducer";
 import conducteurReducer from "../reducers/conducteurReducer";
 import assuranceReducer from "../reducers/assuranceReducer";
+import infoReducer from "../reducers/infoReducer";
 const store = configureStore({
   reducer: {
     vehicule: vehiculeReducer,
     choixVec: choixVehiculeReducer,
-    assurance:assuranceReducer,
+    assurance: assuranceReducer,
     contrat: contrat,
     accident: accidentReducer,
     circonstance: circonstancesReducer,
@@ -23,6 +24,7 @@ const store = configureStore({
     temoin: temoinsReducer,
     assure: assureReducer,
     conducteur: conducteurReducer,
+    info: infoReducer,
   },
 });
 

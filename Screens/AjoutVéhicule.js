@@ -10,43 +10,23 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setType,
-  setAssurance,
-  setImmatriculation,
-  setNumContrat,
-  resetState,
-} from "../reducers/vehiculeReducer";
+import { useDispatch } from "react-redux";
+import { ajout } from "../reducers/infoReducer";
 const AjoutVéhicule = () => {
-  useEffect(() => {
-    return () => {
-      dispatch(resetState());
-    };
-  }, []);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { type, assurance, immatriculation, numContrat } = useSelector(
-    (state) => state.vehicule
-  );
+  const [marque, setMarque] = useState("");
+  const [immatriculation, setImmatriculation] = useState("");
+  const [assurance, setAssurance] = useState("");
+  const [police, setPolice] = useState("");
+  const [agence, setAgence] = useState("");
+  const [type, setType] = useState("");
   const [checked, setChecked] = useState({
     car: false,
     bike: false,
     truck: false,
   });
-
-  const validate = () => {
-    if (!assurance || !immatriculation || !numContrat || !type) {
-      Alert.alert(
-        "Erreur lors de l'ajout",
-        "Tous les champs sont obligatoires pour ajouter une véhicule",
-        [{ text: "OK" }],
-        { cancelable: false }
-      );
-    } else {
-      console.log("Tutu bien");
-    }
-  };
+  const box = {};
 
   return (
     <Screen>
@@ -57,7 +37,7 @@ const AjoutVéhicule = () => {
         <ScrollView horizontal={true}>
           <Pressable
             onPress={() => {
-              dispatch(setType("Car"));
+              setType("Car");
               setChecked({
                 car: true,
                 bike: false,
@@ -76,7 +56,7 @@ const AjoutVéhicule = () => {
           </Pressable>
           <Pressable
             onPress={() => {
-              dispatch(setType("MotorBike"));
+              setType("MotorBike");
               setChecked({
                 car: false,
                 bike: true,
@@ -95,7 +75,7 @@ const AjoutVéhicule = () => {
           </Pressable>
           <Pressable
             onPress={() => {
-              dispatch(setType("Truck"));
+              setType("Truck");
               setChecked({
                 car: false,
                 bike: false,
@@ -114,30 +94,64 @@ const AjoutVéhicule = () => {
           </Pressable>
         </ScrollView>
         <Text style={styles.titre}>
-          Saisissez les informations du véhicule :{" "}
+          Saisissez les informations du l'assurance :
         </Text>
-        <Label text="Assurance" />
+        <View style={{ marginTop: -15 }}>
+          <Label text="Vehicule assuré par" required={true} />
+        </View>
+        <Input value={assurance} onChangeText={(a) => setAssurance(a)} />
+        <Label text="Police d'Assurance N°" required={true} />
         <Input
-          value={assurance}
-          onChangeText={(text) => dispatch(setAssurance(text))}
+          value={police}
+          onChangeText={(a) => setPolice(a)}
+          type="numeric"
         />
-        <Label text="Immatriculation" />
+        <Label text="Agence" required={true} />
+        <Input value={agence} onChangeText={(a) => setAgence(a)} />
+        <Text style={styles.titre}>
+          Saisissez les informations du véhicule :
+        </Text>
+        <View style={{ marginTop: -15 }}>
+          <Label text="Immatriculation" required={true} />
+        </View>
         <Input
           value={immatriculation}
-          onChangeText={(text) => dispatch(setImmatriculation(text))}
+          onChangeText={(i) => setImmatriculation(i)}
         />
-        <Label text="Numéro de contrat" />
-        <Input
-          value={numContrat}
-          onChangeText={(text) => dispatch(setNumContrat(text))}
-        />
+        <Label text="Marque" />
+        <Input value={marque} onChangeText={(i) => setMarque(i)} />
       </View>
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
           onPress={() => navigation.navigate("Info")}
         />
-        <ButtonRouge title="Suivant" onPress={validate} />
+        <ButtonRouge
+          title="Suivant"
+          onPress={() => {
+            if (type && assurance && police && immatriculation) {
+              box["type"] = type;
+              box["assurance"] = assurance;
+              box["police"] = police;
+              box["immatriculation"] = immatriculation;
+              if (marque != "") {
+                box["marque"] = marque;
+              }
+              if (agence != "") {
+                box["agence"] = agence;
+              }
+              dispatch(ajout(box));
+              navigation.navigate("Info");
+            } else {
+              Alert.alert(
+                "Erreur lors de l'ajout",
+                "Vous devez entrer tous les champs obligatoires pour ajouter une véhicule",
+                [{ text: "OK" }],
+                { cancelable: false }
+              );
+            }
+          }}
+        />
       </View>
     </Screen>
   );
@@ -153,10 +167,10 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   titre: {
-    color: "#ffffff",
-    fontSize: 20,
+    color: "#fff",
     fontWeight: "bold",
-    paddingVertical: 20,
+    marginVertical: 20,
+    fontSize: 22,
   },
   buttonContainer: {
     flexDirection: "row",

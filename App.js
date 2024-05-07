@@ -48,6 +48,7 @@ import SignatureB from "./Screens/SignatureB";
 import SignatureSeul from "./Screens/SignatureSeul";
 import Croquis from "./Screens/Croquis";
 import CroquisSeul from "./Screens/CroquisSeul";
+import InfoAssure from "./Screens/InfoAssure";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Test from "./Screens/Test";
@@ -58,7 +59,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="AjoutVéhicule">
           <Stack.Screen
             name="Home"
             component={Home}
@@ -292,6 +293,11 @@ export default function App() {
           <Stack.Screen
             name="CroquisSeul"
             component={CroquisSeul}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoAssure"
+            component={InfoAssure}
             options={{ headerShown: false }}
           />
           <Stack.Screen

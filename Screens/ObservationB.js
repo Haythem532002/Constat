@@ -7,11 +7,12 @@ import VehiculeIndication from "../Components/VehiculeIndication";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setObservationB } from "../reducers/croquisReducer";
 const ObservationB = () => {
   const navigation = useNavigation();
-  const [commentaire, setCommentaire] = useState("");
+  const { observationB } = useSelector((state) => state.croquis);
+  const [commentaire, setCommentaire] = useState(observationB);
   const dispatch = useDispatch();
   return (
     <Screen>

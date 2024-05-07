@@ -14,6 +14,17 @@ const TémoinB = () => {
   const navigation = useNavigation();
   const { temoinTable } = useSelector((state) => state.temoin);
   const dispatch = useDispatch();
+
+  const supp = (temoinTable, index) => {
+    let j = 0;
+    let temp = [];
+    for (let i = 0; i < temoinTable.length; i++) {
+      if (i !== index) {
+        temp[j] = temoinTable[i];
+        j++;
+      }
+    }
+  };
   return (
     <Screen>
       <Nav screen="ChoixVehiculeB" />
@@ -32,14 +43,7 @@ const TémoinB = () => {
               <View style={{ flexDirection: "row" }}>
                 <Pressable
                   onPress={() => {
-                    let j = 0;
-                    let temp = [];
-                    for (let i = 0; i < temoinTable.length; i++) {
-                      if (i !== index) {
-                        temp[j] = temoinTable[i];
-                        j++;
-                      }
-                    }
+                    let temp = supp(temoinTable, index);
                     dispatch(modifieTable(temp));
                   }}
                   style={{ marginLeft: 20 }}
