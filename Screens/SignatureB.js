@@ -58,16 +58,20 @@ const SignatureB = () => {
           title="Suivant"
           onPress={() => {
             dispatch(setSignatureB(signature));
-            axios({
-              method: "post",
-              url: "localhost:3000/api/v1/constat",
-              data: {
+            axios
+              .post("http://127.0.0.1::3000/api/v1/constat", {
                 nomAssuréA: nomA,
                 prenomAssureA: prenomA,
                 numTelephoneA: numTelA,
-              },
-            });
-            navigation.navigate("SignatureB");
+                adressEmailA: "khiarih06@gmail.com",
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log("Error : " + error);
+              });
+            // navigation.navigate("SignatureB");
           }}
         />
       </View>
