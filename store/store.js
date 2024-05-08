@@ -11,6 +11,7 @@ import assureReducer from "../reducers/assureReducer";
 import conducteurReducer from "../reducers/conducteurReducer";
 import assuranceReducer from "../reducers/assuranceReducer";
 import infoReducer from "../reducers/infoReducer";
+import constatSeulReducer from "../reducers/constatSeulReducer";
 const store = configureStore({
   reducer: {
     vehicule: vehiculeReducer,
@@ -25,6 +26,7 @@ const store = configureStore({
     assure: assureReducer,
     conducteur: conducteurReducer,
     info: infoReducer,
+    constatSeul: constatSeulReducer,
   },
 });
 

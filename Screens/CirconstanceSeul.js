@@ -6,8 +6,10 @@ import Title from "../Components/Title";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { setCirconstance } from "../reducers/constatSeulReducer";
 
-const Box = ({ text, checkedA,  onToggleA }) => {
+const Box = ({ text, checkedA, onToggleA }) => {
   return (
     <View
       style={{
@@ -36,9 +38,25 @@ const Box = ({ text, checkedA,  onToggleA }) => {
     </View>
   );
 };
+const Line = () => {
+  return (
+    <View style={{ alignItems: "center", marginVertical: 10 }}>
+      <View
+        style={{
+          backgroundColor: "#fff",
+          height: 3,
+          width: "90%",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      ></View>
+    </View>
+  );
+};
 
 const CirconstanceSeul = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [boxStatesA, setBoxStatesA] = useState({
     stationnement: false,
     quittaitStationnement: false,
@@ -75,28 +93,73 @@ const CirconstanceSeul = () => {
         <Box
           text="en stationnement"
           checkedA={boxStatesA.stationnement}
-          onToggleA={() => handleBoxToggleA("stationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("stationnement");
+            if (boxStatesA.quittaitStationnement == true) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.prenaitStationnement == true) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
         />
         <Box
           text="quittait un stationnement"
           checkedA={boxStatesA.quittaitStationnement}
-          onToggleA={() => handleBoxToggleA("quittaitStationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("quittaitStationnement");
+            if (boxStatesA.stationnement == true) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.prenaitStationnement == true) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
         />
         <Box
           text="prenait un stationnement"
           checkedA={boxStatesA.prenaitStationnement}
-          onToggleA={() => handleBoxToggleA("prenaitStationnement")}
+          onToggleA={() => {
+            handleBoxToggleA("prenaitStationnement");
+            if (boxStatesA.stationnement == true) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.quittaitStationnement == true) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
         />
+        <Line />
         <Box
           text="sortait d'un parking,d'un lieu privé,d'un chemin de terre"
           checkedA={boxStatesA.sortaitParking}
-          onToggleA={() => handleBoxToggleA("sortaitParking")}
+          onToggleA={() => {
+            handleBoxToggleA("sortaitParking");
+            if (boxStatesA.sengageaitParking) {
+              handleBoxToggleA("sengageaitParking");
+            }
+          }}
         />
         <Box
           text="s'engageait dans un parking, un lieu privé,un chemin de terre"
           checkedA={boxStatesA.sengageaitParking}
-          onToggleA={() => handleBoxToggleA("sengageaitParking")}
+          onToggleA={() => {
+            handleBoxToggleA("sengageaitParking");
+            if (boxStatesA.sortaitParking) {
+              handleBoxToggleA("sortaitParking");
+            }
+          }}
         />
+        <Line />
         <Box
           text="arrét de circulation"
           checkedA={boxStatesA.arretCirculation}
@@ -110,12 +173,22 @@ const CirconstanceSeul = () => {
         <Box
           text="heurtait à l'arriere,en roulant dans le méme sens et sur une méme file"
           checkedA={boxStatesA.heurtaitArriere}
-          onToggleA={() => handleBoxToggleA("heurtaitArriere")}
+          onToggleA={() => {
+            handleBoxToggleA("heurtaitArriere");
+            if (boxStatesA.roulaitMemeSens) {
+              handleBoxToggleA("roulaitMemeSens");
+            }
+          }}
         />
         <Box
           text="roulait dans le méme sens et sur une file différente"
           checkedA={boxStatesA.roulaitMemeSens}
-          onToggleA={() => handleBoxToggleA("roulaitMemeSens")}
+          onToggleA={() => {
+            handleBoxToggleA("roulaitMemeSens");
+            if (boxStatesA.heurtaitArriere) {
+              handleBoxToggleA("heurtaitArriere");
+            }
+          }}
         />
         <Box
           text="changeait de file"
@@ -127,16 +200,28 @@ const CirconstanceSeul = () => {
           checkedA={boxStatesA.doublait}
           onToggleA={() => handleBoxToggleA("doublait")}
         />
+        <Line />
         <Box
           text="virait à droite"
           checkedA={boxStatesA.viraitDroite}
-          onToggleA={() => handleBoxToggleA("viraitDroite")}
+          onToggleA={() => {
+            handleBoxToggleA("viraitDroite");
+            if (boxStatesA.viraitGauche) {
+              handleBoxToggleA("viraitGauche");
+            }
+          }}
         />
         <Box
           text="virait à gauche"
           checkedA={boxStatesA.viraitGauche}
-          onToggleA={() => handleBoxToggleA("viraitGauche")}
+          onToggleA={() => {
+            handleBoxToggleA("viraitGauche");
+            if (boxStatesA.viraitDroite) {
+              handleBoxToggleA("viraitDroite");
+            }
+          }}
         />
+        <Line />
         <Box
           text="reculait"
           checkedA={boxStatesA.reculait}
@@ -155,7 +240,12 @@ const CirconstanceSeul = () => {
         <Box
           text="n'avait pas observé le signal de priorité"
           checkedA={boxStatesA.navaitPasObserved}
-          onToggleA={() => handleBoxToggleA("navaitPasObserved")}
+          onToggleA={() => {
+            handleBoxToggleA("navaitPasObserved");
+            if (boxStatesA.aucun) {
+              handleBoxToggleA("aucun");
+            }
+          }}
         />
       </View>
       <View
@@ -170,7 +260,60 @@ const CirconstanceSeul = () => {
         <Box
           text="Ma situation ne correspond à aucune de ces propositions"
           checkedA={boxStatesA.aucun}
-          onToggleA={() => handleBoxToggleA("aucun")}
+          onToggleA={() => {
+            handleBoxToggleA("aucun");
+            if (boxStatesA.stationnement) {
+              handleBoxToggleA("stationnement");
+            }
+            if (boxStatesA.quittaitStationnement) {
+              handleBoxToggleA("quittaitStationnement");
+            }
+            if (boxStatesA.prenaitStationnement) {
+              handleBoxToggleA("prenaitStationnement");
+            }
+            if (boxStatesA.sortaitParking) {
+              handleBoxToggleA("sortaitParking");
+            }
+            if (boxStatesA.sengageaitParking) {
+              handleBoxToggleA("sengageaitParking");
+            }
+            if (boxStatesA.arretCirculation) {
+              handleBoxToggleA("arretCirculation");
+            }
+            if (boxStatesA.frottement) {
+              handleBoxToggleA("frottement");
+            }
+            if (boxStatesA.heurtaitArriere) {
+              handleBoxToggleA("heurtaitArriere");
+            }
+            if (boxStatesA.roulaitMemeSens) {
+              handleBoxToggleA("roulaitMemeSens");
+            }
+            if (boxStatesA.changeaitFile) {
+              handleBoxToggleA("changeaitFile");
+            }
+            if (boxStatesA.doublait) {
+              handleBoxToggleA("doublait");
+            }
+            if (boxStatesA.viraitDroite) {
+              handleBoxToggleA("viraitDroite");
+            }
+            if (boxStatesA.viraitGauche) {
+              handleBoxToggleA("viraitGauche");
+            }
+            if (boxStatesA.reculait) {
+              handleBoxToggleA("reculait");
+            }
+            if (boxStatesA.empletait) {
+              handleBoxToggleA("empletait");
+            }
+            if (boxStatesA.venaitDroite) {
+              handleBoxToggleA("venaitDroite");
+            }
+            if (boxStatesA.navaitPasObserved) {
+              handleBoxToggleA("navaitPasObserved");
+            }
+          }}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -180,7 +323,10 @@ const CirconstanceSeul = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("AccidentSeul")}
+          onPress={() => {
+            dispatch(setCirconstance(boxStatesA));
+            navigation.navigate("AccidentSeul");
+          }}
         />
       </View>
     </Screen>

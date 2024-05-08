@@ -8,14 +8,14 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Signature from "react-native-signature-canvas";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSignatureB } from "../reducers/croquisReducer";
-
+import axios from "axios";
 const SignatureB = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [signature, setSign] = useState(null);
-
+  const { nomA, prenomA, numTelA } = useSelector((state) => state.assure);
   const handleOK = (signature) => {
     setSign(signature);
   };
@@ -58,6 +58,15 @@ const SignatureB = () => {
           title="Suivant"
           onPress={() => {
             dispatch(setSignatureB(signature));
+            axios({
+              method: "post",
+              url: "localhost:3000/api/v1/constat",
+              data: {
+                nomAssuréA: nomA,
+                prenomAssureA: prenomA,
+                numTelephoneA: numTelA,
+              },
+            });
             navigation.navigate("SignatureB");
           }}
         />

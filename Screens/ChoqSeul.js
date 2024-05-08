@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -7,33 +7,54 @@ import {
   Pressable,
   Switch,
   TextInput,
+  Alert,
 } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
-import VehiculeIndication from "../Components/VehiculeIndication";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconF from "react-native-vector-icons/FontAwesome";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { captureRef } from "react-native-view-shot";
+import { setAccident } from "../reducers/constatSeulReducer";
 
 const ChoqSeul = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [squares, setSquares] = useState(Array(12).fill(false));
-  const toggleSquare = (index) => {
-    const updatedSquares = squares.map((square, i) => i === index);
-    setSquares(updatedSquares);
+  const { accident } = useSelector((state) => state.constatSeul);
+
+  const [capturedImageUri, setCapturedImageUri] = useState(
+    accident.capturedImageUri
+  );
+  const [choc, setChoc] = useState(true);
+  const [descreption, setDescreption] = useState(accident.descreption);
+  const [degat, setDegat] = useState(accident.degat);
+  const [squares, setSquares] = useState(accident.squares);
+  const takeScreenShot = async () => {
+    try {
+      const uri = await captureRef(viewRef, {
+        format: "jpg",
+        quality: 1,
+      });
+      setCapturedImageUri(uri);
+      return uri;
+    } catch (error) {
+      console.log("Oops, failed to capture!", error);
+      return null;
+    }
   };
+  const viewRef = useRef();
+
   const backColor = (checked) => {
     if (checked) {
       return { backgroundColor: "red" };
     }
     return {};
   };
-  const [choc, setChoc] = useState(false);
-  const [damage, setDamage] = useState("");
-  const [images, setImages] = useState([]);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -43,7 +64,14 @@ const ChoqSeul = () => {
     });
 
     if (!result.cancelled && result.assets) {
-      setImages([...images, result.assets[0].uri]);
+      setDegat([...degat, result.assets[0].uri]);
+    }
+  };
+  const toggleSquare = (index) => {
+    const updatedSquares = squares.map((square, i) => i === index);
+    setSquares(updatedSquares);
+    if (choc) {
+      setChoc(false);
     }
   };
   return (
@@ -63,6 +91,7 @@ const ChoqSeul = () => {
         </Text>
       </View>
       <View
+        ref={viewRef}
         style={{
           width: 360,
           height: 200,
@@ -266,7 +295,10 @@ const ChoqSeul = () => {
           <Switch
             trackColor={{ false: "#767577", true: "#ffffff" }}
             thumbColor={choc ? "red" : "#f4f3f4"}
-            onValueChange={() => setChoc((prev) => !prev)}
+            onValueChange={() => {
+              setChoc((prev) => !prev);
+              setSquares(Array(12).fill(false));
+            }}
             value={choc}
           />
         </View>
@@ -287,9 +319,9 @@ const ChoqSeul = () => {
           </Text>
         </Pressable>
       </View>
-      {images.length > 0 && (
+      {degat.length > 0 && (
         <View style={styles.imageContainer}>
-          {images.map((ele) => (
+          {degat.map((ele) => (
             <Image
               key={ele}
               source={{ uri: ele }}
@@ -301,10 +333,11 @@ const ChoqSeul = () => {
       <View style={{ marginTop: 20 }}>
         <Text style={styles.titre}>Descreption de damage : </Text>
         <TextInput
-          value={damage}
-          onChangeText={(t) => setDamage(t)}
+          value={descreption}
+          onChangeText={(t) => setDescreption(t)}
           textAlignVertical="top"
-          style={styles.descreption}
+          multiline
+          style={[styles.descreption, { fontSize: 18 }]}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -314,7 +347,29 @@ const ChoqSeul = () => {
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoqSeulRecap", { squares })}
+          onPress={async () => {
+            try {
+              const capturedImageUri = await takeScreenShot();
+              if (capturedImageUri) {
+                dispatch(
+                  setAccident({
+                    capturedImageUri,
+                    degat,
+                    squares,
+                    descreption,
+                  })
+                );
+                navigation.navigate("ChoqSeulRecap");
+              } else {
+                Alert.alert(
+                  "Erreur",
+                  "Erreur lors de selectionner le point de choq initial"
+                );
+              }
+            } catch (error) {
+              console.log("An error occurred:", error);
+            }
+          }}
         />
       </View>
     </Screen>

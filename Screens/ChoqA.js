@@ -19,7 +19,7 @@ import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { useDispatch, useSelector } from "react-redux";
-import { accidentA, setAccidentA } from "../reducers/accidentReducer";
+import { setAccidentA } from "../reducers/accidentReducer";
 import { captureRef } from "react-native-view-shot";
 
 const ChoqA = () => {

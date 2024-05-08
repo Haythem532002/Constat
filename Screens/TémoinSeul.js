@@ -7,23 +7,34 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { modifieTable } from "../reducers/constatSeulReducer";
 
 const TémoinSeul = () => {
   const navigation = useNavigation();
-  const { temoin2 } = useSelector((state) => state.choixVec);
-  const { vec2 } = useSelector((state) => state.choixVec);
-  console.log(temoin2);
-  console.log(vec2);
+  const { temoinTable } = useSelector((state) => state.constatSeul);
+  const dispatch = useDispatch();
+
+  const supp = (temoinTable, index) => {
+    let j = 0;
+    let temp = [];
+    for (let i = 0; i < temoinTable.length; i++) {
+      if (i !== index) {
+        temp[j] = temoinTable[i];
+        j++;
+      }
+    }
+  };
   return (
     <Screen>
       <Nav screen="ChoixVéhiculeSeul" />
       <Title text="Ajout des témoins (optionnel)" />
       <Text style={styles.textColor}>
-        Vous pouvez ajouter jusqu'à 4 témoins pour completer votre e-constat
+        Vous pouvez ajouter des témoins pour completer votre e-constat
       </Text>
-      {temoin2.length > 0 &&
-        temoin2.map((ele, index) => {
+      {temoinTable !== undefined &&
+        temoinTable.length > 0 &&
+        temoinTable.map((ele, index) => {
           return (
             <View key={index} style={styles.container}>
               <View>
@@ -31,7 +42,13 @@ const TémoinSeul = () => {
                 <Text style={styles.text}>{ele.fullName}</Text>
               </View>
               <View style={{ flexDirection: "row" }}>
-                <Pressable style={{ marginLeft: 20 }}>
+                <Pressable
+                  onPress={() => {
+                    let temp = supp(temoinTable, index);
+                    dispatch(modifieTable(temp));
+                  }}
+                  style={{ marginLeft: 20 }}
+                >
                   <Icon name="trash" size={30} color="#ffffff" />
                 </Pressable>
               </View>

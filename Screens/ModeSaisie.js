@@ -6,6 +6,7 @@ import {
   Pressable,
   Image,
   TextInput,
+  Alert,
 } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
@@ -16,6 +17,7 @@ const ModeSaisie = () => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [code, setCode] = useState("");
+  const [com, setCom] = useState("");
   const isOacity = () => {
     if (modalVisible) {
       return { opacity: 0.2 };
@@ -70,6 +72,8 @@ const ModeSaisie = () => {
               paddingHorizontal: 20,
               marginTop: 20,
             }}
+            value={com}
+            onChangeText={(c) => setCom(c)}
           />
           <View
             style={{
@@ -84,8 +88,18 @@ const ModeSaisie = () => {
                 Annuler
               </Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate("ChoixVéhiculeSeul")}>
-              <Text style={[styles.buttonStyle,{ backgroundColor: "red" }]}>Valider</Text>
+            <Pressable
+              onPress={() => {
+                if (code === com) {
+                  navigation.navigate("ChoixVéhiculeSeul");
+                } else {
+                  Alert.alert("Erreur", "Le code est incorrect");
+                }
+              }}
+            >
+              <Text style={[styles.buttonStyle, { backgroundColor: "red" }]}>
+                Valider
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -93,7 +107,7 @@ const ModeSaisie = () => {
       <View style={isOacity()}>
         <DynamicHeader screen="Home" num={1} />
         <Title text="Choisir le mode de Saisie :" />
-        <View style={{ alignItems: "center" ,marginTop:-20}}>
+        <View style={{ alignItems: "center", marginTop: -20 }}>
           <Pressable onPress={() => navigation.navigate("ChoixVehiculeA")}>
             <View
               style={{

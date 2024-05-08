@@ -9,14 +9,26 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCodePostalS,
+  setDateS,
+  setHeureS,
+  setLieuS,
+  setVilleS,
+} from "../reducers/constatSeulReducer";
 
 const AccidentSeul = () => {
   const navigation = useNavigation();
-  const [date, setDate] = useState("");
-  const [heure, setHeure] = useState("");
-  const [lieu, setLieu] = useState("");
-  const [codePostal, setCodePostal] = useState("");
-  const [ville, setVille] = useState("");
+  const dispatch = useDispatch();
+  const { lieuS, codePostalS, villeS } = useSelector(
+    (state) => state.constatSeul
+  );
+  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [heure, setHeure] = useState(new Date().toLocaleTimeString());
+  const [lieu, setLieu] = useState(lieuS);
+  const [codePostal, setCodePostal] = useState(codePostalS);
+  const [ville, setVille] = useState(villeS);
 
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -41,34 +53,36 @@ const AccidentSeul = () => {
   }
   return (
     <Screen>
-      <DynamicHeader screen="ChoqSeulRecap" num={3} />
+      <DynamicHeader screen="Circonstance" num={3} />
       <Title text="Indiquer la date, l'heure et le lieu de l'accident" />
       <Label text="Date" required={true} />
-      <Input
-        value={new Date().toLocaleDateString()}
-        style={{ fontSize: 22 }}
-        onChangeText={setDate}
-      />
+      <Input value={date} style={{ fontSize: 22 }} editable={false} />
       <Label text="Heure" required={true} />
-      <Input value={new Date().toLocaleTimeString()} onChangeText={setHeure} />
+      <Input value={heure} editable={false} />
       <Label text="Lieu (Adresse,Route,etc..)" required={true} />
-      <Input value={lieu} onChangeText={setLieu} />
+      <Input value={lieu} onChangeText={(l) => setLieu(l)} />
       <Label text="Code Postal" />
-      <Input value={codePostal} onChangeText={setCodePostal} />
+      <Input value={codePostal} onChangeText={(c) => setCodePostal(c)} />
       <Label text="Ville" />
-      <Input value={ville} onChangeText={setVille} />
+      <Input value={ville} onChangeText={(v) => setVille(v)} />
       <Pressable>
         <Text style={styles.button}>Me Localiser</Text>
       </Pressable>
-      {/* <Text style={styles.paragraph}>{text}</Text> */}
       <View style={styles.buttonContainer}>
         <ButtonBlanc
           title="Précedent"
-          onPress={() => navigation.navigate("ChoqSeulRecap")}
+          onPress={() => navigation.navigate("CirconstanceSeul")}
         />
         <ButtonRouge
           title="Suivant"
-          onPress={() => navigation.navigate("ChoixCroquisSeul")}
+          onPress={() => {
+            dispatch(setDateS(date));
+            dispatch(setHeureS(heure));
+            dispatch(setLieuS(lieu));
+            dispatch(setCodePostalS(codePostal));
+            dispatch(setVilleS(ville));
+            navigation.navigate("ChoixCroquisSeul");
+          }}
         />
       </View>
     </Screen>

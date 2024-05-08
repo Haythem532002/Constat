@@ -7,9 +7,13 @@ import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
 import Title from "../Components/Title";
+import { useDispatch, useSelector } from "react-redux";
+import { setTypeVehicule } from "../reducers/constatSeulReducer";
 const ChoixVehiculeSeul = () => {
   const navigation = useNavigation();
-  const [vehicule, setVehicule] = useState("");
+  const dispatch = useDispatch();
+  const { typeVehicule } = useSelector((state) => state.constatSeul);
+  const [vehicule, setVehicule] = useState(typeVehicule);
   const [checked, setChecked] = useState({
     car: false,
     bike: false,
@@ -18,7 +22,7 @@ const ChoixVehiculeSeul = () => {
   return (
     <Screen>
       <DynamicHeader screen="ModeSaisie" num={1} />
-      <Title text="Choix Type Véhiclue : " />
+      <Title text="Type de véhiclue : " />
       <View>
         <View style={styles.container}>
           <Pressable
@@ -86,7 +90,10 @@ const ChoixVehiculeSeul = () => {
           />
           <ButtonRouge
             title="Suivant"
-            onPress={() => navigation.navigate("TémoinSeul")}
+            onPress={() => {
+              dispatch(setTypeVehicule(vehicule));
+              navigation.navigate("TémoinSeul");
+            }}
           />
         </View>
       </View>

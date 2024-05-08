@@ -10,7 +10,7 @@ import { Alert } from "react-native";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useDispatch } from "react-redux";
-import { setTemoin2 } from "../reducers/choixVehiculeReducer";
+import { ajoutTémoin } from "../reducers/constatSeulReducer";
 
 const AjoutTémoinSeul = () => {
   const navigation = useNavigation();
@@ -34,11 +34,11 @@ const AjoutTémoinSeul = () => {
       <Label text="Nom et Prénom" required={true} />
       <Input value={fullName} onChangeText={(text) => setFullName(text)} />
       <Label text="Numéro de téléphone" required={true} />
-      <Input value={num} onChangeText={(num) => setNum(num)} />
+      <Input value={num} onChangeText={(num) => setNum(num)} type="numeric" />
       <Label text="Adresse" required={true} />
       <Input value={adresse} onChangeText={(adresse) => setAdresse(adresse)} />
       <Label text="Code Postal" />
-      <Input value={code} onChangeText={(cod) => setCode(cod)} />
+      <Input value={code} onChangeText={(cod) => setCode(cod)} type="numeric" />
       <Label text="Ville" />
       <Input value={ville} onChangeText={(v) => setVille(v)} />
       <View style={styles.buttonContainer}>
@@ -52,7 +52,7 @@ const AjoutTémoinSeul = () => {
           title="Suivant"
           onPress={() => {
             if (validate()) {
-              dispatch(setTemoin2({ fullName, num, adresse, code, ville }));
+              dispatch(ajoutTémoin({ fullName, num, adresse, code, ville }));
               navigation.navigate("TémoinSeul");
             } else {
               Alert.alert(

@@ -16,6 +16,7 @@ import TémoinSeul from "./Screens/TémoinSeul";
 import AjoutTémoinA from "./Screens/AjoutTémoinA";
 import AjoutTémoinB from "./Screens/AjoutTémoinB";
 import AjoutTémoin from "./Screens/AjoutTémoin";
+import AjoutTémoinSeul from "./Screens/AjoutTémoinSeul";
 import InfoAssuranceA from "./Screens/InfoAssuranceA";
 import InfoAssuranceB from "./Screens/InfoAssuranceB";
 import InfoAssuranceSeul from "./Screens/InfoAssuranceSeul";
@@ -59,7 +60,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AjoutVéhicule">
+        <Stack.Navigator initialRouteName="ChoqSeul">
           <Stack.Screen
             name="Home"
             component={Home}
@@ -298,6 +299,11 @@ export default function App() {
           <Stack.Screen
             name="InfoAssure"
             component={InfoAssure}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AjoutTémoinSeul"
+            component={AjoutTémoinSeul}
             options={{ headerShown: false }}
           />
           <Stack.Screen
