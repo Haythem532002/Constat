@@ -53,7 +53,11 @@ const InfoAssuranceB = () => {
           type="numeric"
         />
         <Label text="Agence" required={true} />
-        <Input value={agence} onChangeText={(a) => setAgence(a)} />
+        <Input
+          value={agence}
+          type="numeric"
+          onChangeText={(a) => setAgence(a)}
+        />
         <View style={{ marginVertical: 10 }}></View>
         <Titre text="Identité de Véhicule" />
         <Label text="Immatriculation" required={true} />

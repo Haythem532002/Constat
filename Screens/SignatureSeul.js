@@ -32,7 +32,7 @@ const SignatureSeul = () => {
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Veuillez signer avec le doight :{" "}
       </Text>
-      <View style={{ width: 370, height: 350 }}>
+      <View style={{ width: 335, height: 350 }}>
         <Signature
           onOK={handleOK}
           onEmpty={handleEmpty}

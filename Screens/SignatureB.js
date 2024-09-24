@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -10,18 +10,54 @@ import { useNavigation } from "@react-navigation/native";
 import Signature from "react-native-signature-canvas";
 import { useDispatch, useSelector } from "react-redux";
 import { setSignatureB } from "../reducers/croquisReducer";
-import axios from "axios";
+
 const SignatureB = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [signature, setSign] = useState(null);
   const { nomA, prenomA, numTelA } = useSelector((state) => state.assure);
+  const { nomB, prenomB, numTelB } = useSelector((state) => state.assure);
+  const { emailConA, emailConB } = useSelector((state) => state.conducteur);
+  const { immatriculationA, immatriculationB } = useSelector(
+    (state) => state.vehicule
+  );
   const handleOK = (signature) => {
     setSign(signature);
   };
 
   const handleEmpty = () => {
     console.log("Empty");
+  };
+
+  const sendEmail = async () => {
+    const response = "";
+    try {
+      response = await fetch("http://192.168.1.19:5000/api/v1/constat", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nomAssuréA: nomA,
+          prenomAssureA: prenomA,
+          numTelephoneA: numTelA,
+          adressEmailA: emailConA,
+          immatA: immatriculationA,
+          nomAssuréB: nomB,
+          prenomAssureB: prenomB,
+          numTelephoneB: numTelB,
+          adressEmailB: emailConB,
+          immatB: immatriculationB,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+      console.log(await response.json());
+    } catch (error) {
+      console.log("Error: ", error.message);
+    }
   };
 
   const style = `.m-signature-pad--footer
@@ -37,9 +73,9 @@ const SignatureB = () => {
         <VehiculeIndication letter="B" />
       </View>
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
-        Veuillez signer avec le doight :{" "}
+        Veuillez signer avec le doight :
       </Text>
-      <View style={{ width: 370, height: 350 }}>
+      <View style={{ width: 340, height: 350 }}>
         <Signature
           onOK={handleOK}
           onEmpty={handleEmpty}
@@ -58,19 +94,11 @@ const SignatureB = () => {
           title="Suivant"
           onPress={() => {
             dispatch(setSignatureB(signature));
-            axios
-              .post("http://127.0.0.1::3000/api/v1/constat", {
-                nomAssuréA: nomA,
-                prenomAssureA: prenomA,
-                numTelephoneA: numTelA,
-                adressEmailA: "khiarih06@gmail.com",
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log("Error : " + error);
-              });
+            sendEmail();
+            Alert.alert(
+              "Succes",
+              "Le constat est creé avec Succés ! Verifer votre mail pour voir vos informations de constat."
+            );
             // navigation.navigate("SignatureB");
           }}
         />
@@ -84,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 80,
+    paddingTop: 100,
   },
   signatureCapture: {
     width: 300,

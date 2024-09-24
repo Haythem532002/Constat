@@ -44,7 +44,7 @@ const InfoSupp = () => {
     <Screen>
       <DynamicHeader screen="ChoixCroquis" num={4} />
       <Title text="Informations Supplémentaires" />
-      <Text style={{ color: "#ffffff", fontSize: 18, marginVertical: 20 }}>
+      <Text style={{ color: "#ffffff", fontSize: 18, marginBottom: 10 }}>
         Vous pouvez prendre des photos supplémentaires de l'accident
       </Text>
       <Pressable onPress={pickImage} style={styles.buttonStyle}>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 310,
+    paddingTop: 355,
     marginBottom: 35,
   },
   imageContainer: {

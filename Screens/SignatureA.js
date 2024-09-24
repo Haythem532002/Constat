@@ -39,7 +39,7 @@ const SignatureA = () => {
       <Text style={{ color: "#ffffff", fontSize: 22, marginBottom: 20 }}>
         Veuillez signer avec le doight :{" "}
       </Text>
-      <View style={{ width: 370, height: 350 }}>
+      <View style={{ width: 340, height: 350 }}>
         <Signature
           onOK={handleOK}
           onEmpty={handleEmpty}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 80,
+    paddingTop: 100,
   },
   signatureCapture: {
     width: 300,

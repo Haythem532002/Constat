@@ -24,17 +24,17 @@ const Photo = ({ letter }) => {
     <View
       style={[
         {
-          width: 60,
-          height: 60,
+          width: 50,
+          height: 50,
           padding: 10,
-          borderRadius: 30,
+          borderRadius: 25,
         },
         backColor(letter),
       ]}
     >
       <Image
         source={require("../assets/WhiteCar.png")}
-        style={{ width: 40, height: 40 }}
+        style={{ width: 30, height: 30 }}
         resizeMode="contain"
       />
     </View>
@@ -61,7 +61,7 @@ const Box = ({ text, checkedA, checkedB, onToggleA, onToggleB }) => {
         style={{
           color: "#ffffff",
           fontSize: 20,
-          width: 250,
+          width: 242,
           textAlign: "center",
         }}
       >
@@ -104,7 +104,7 @@ const Line = () => {
         style={{
           backgroundColor: "#fff",
           height: 3,
-          width: "90%",
+          width: "80%",
           flexDirection: "row",
           alignItems: "center",
         }}
@@ -442,7 +442,6 @@ const Circonstance = () => {
           marginVertical: 20,
           backgroundColor: "gray",
           paddingVertical: 20,
-          paddingHorizontal: 10,
           borderRadius: 8,
         }}
       >

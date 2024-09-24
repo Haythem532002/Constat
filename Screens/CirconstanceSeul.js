@@ -29,7 +29,7 @@ const Box = ({ text, checkedA, onToggleA }) => {
         style={{
           color: "#ffffff",
           fontSize: 20,
-          width: 300,
+          width: 270,
           textAlign: "center",
         }}
       >

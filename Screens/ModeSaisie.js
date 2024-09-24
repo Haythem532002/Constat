@@ -40,7 +40,7 @@ const ModeSaisie = () => {
             backgroundColor: "#D9D9D9",
             top: "20%",
             left: "3%",
-            width: 350,
+            width: 320,
             height: 450,
             zIndex: 2,
             borderRadius: 8,
@@ -74,6 +74,7 @@ const ModeSaisie = () => {
             }}
             value={com}
             onChangeText={(c) => setCom(c)}
+            keyboardType="numeric"
           />
           <View
             style={{
@@ -107,7 +108,7 @@ const ModeSaisie = () => {
       <View style={isOacity()}>
         <DynamicHeader screen="Home" num={1} />
         <Title text="Choisir le mode de Saisie :" />
-        <View style={{ alignItems: "center", marginTop: -20 }}>
+        <View style={{ alignItems: "center", marginTop: -35 }}>
           <Pressable onPress={() => navigation.navigate("ChoixVehiculeA")}>
             <View
               style={{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
@@ -8,7 +8,6 @@ import Input from "../Components/Input";
 import ButtonBlanc from "../Components/ButtonBlanc";
 import ButtonRouge from "../Components/ButtonRouge";
 import { useNavigation } from "@react-navigation/native";
-import * as Location from "expo-location";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setDateS,
@@ -29,28 +28,6 @@ const Accident = () => {
   const [lieu, setLieu] = useState(lieuS);
   const [codePostal, setCodePostal] = useState(codePostalS);
   const [ville, setVille] = useState(villeS);
-
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
   return (
     <Screen>
       <DynamicHeader screen="Circonstance" num={3} />
@@ -62,7 +39,7 @@ const Accident = () => {
       <Label text="Lieu (Adresse,Route,etc..)" required={true} />
       <Input value={lieu} onChangeText={(l) => setLieu(l)} />
       <Label text="Code Postal" />
-      <Input value={codePostal} onChangeText={(c) => setCodePostal(c)} />
+      <Input value={codePostal} type="numeric" onChangeText={(c) => setCodePostal(c)} />
       <Label text="Ville" />
       <Input value={ville} onChangeText={(v) => setVille(v)} />
       <Pressable>

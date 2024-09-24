@@ -95,7 +95,7 @@ const ContratSeul = () => {
           <Input value={adrC} onChangeText={(ac) => setAdrC(ac)} />
         </View>
       )}
-      <Label text="Permis de conduire" required={true} />
+      <Label text="Permis de conduire N°" type="numeric" required={true} />
       <Input value={permis} onChangeText={(p) => setPermis(p)} />
       <Label text="E-mail" required={true} />
       <Input value={email} onChangeText={(e) => setEmail(e)} />
@@ -115,7 +115,7 @@ const ContratSeul = () => {
               dispatch(setPermisCon(permis));
               dispatch(setEmailCon(email));
               if (!isAssureConducteur) {
-                dispatch(setIsConA(false));
+                dispatch(setIsCon(false));
                 if (nomConducteur && prenomConducteur && permis && email) {
                   dispatch(setNomCon(nomConducteur));
                   dispatch(setPrenomCon(prenomConducteur));

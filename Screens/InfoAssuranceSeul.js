@@ -45,9 +45,17 @@ const InfoAssuranceSeul = () => {
         <Label text="Vehicule assuré par" required={true} />
         <Input value={assurance} onChangeText={(a) => setAssurance(a)} />
         <Label text="Police d'Assurance N°" required={true} />
-        <Input value={policeI} onChangeText={(a) => setPoliceI(a)} />
+        <Input
+          value={policeI}
+          type="numeric"
+          onChangeText={(a) => setPoliceI(a)}
+        />
         <Label text="Agence" required={true} />
-        <Input value={agenceI} onChangeText={(a) => setAgenceI(a)} />
+        <Input
+          value={agenceI}
+          type="numeric"
+          onChangeText={(a) => setAgenceI(a)}
+        />
         <View style={{ marginVertical: 10 }}></View>
         <Titre text="Identité de Véhicule" />
         <Label text="Immatriculation" required={true} />

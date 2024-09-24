@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable,Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -42,7 +42,7 @@ const PhotoCroquis = () => {
     <Screen>
       <DynamicHeader screen="ChoixCroquis" num={4} />
       <Title text="Photo de croquis de l'accident" />
-      <Text style={{ color: "#ffffff", fontSize: 18, marginVertical: 20 }}>
+      <Text style={{ color: "#ffffff", fontSize: 18, marginBottom: 10 }}>
         Si vous le souhaitez, vous pouvez prendre en photo le croquis de
         l'accident
       </Text>
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 310,
-    marginBottom:35,
+    paddingTop: 350,
+    marginBottom: 35,
   },
   imageContainer: {
     flexDirection: "row",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexWrap: "wrap",
     gap: 20,
-    marginVertical:20
+    marginVertical: 20,
   },
   text: {
     marginLeft: 10,

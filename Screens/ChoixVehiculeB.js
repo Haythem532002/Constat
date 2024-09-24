@@ -38,7 +38,7 @@ const ChoixVehiculeB = () => {
           <Vehicule
             text={require("../assets/Carred.png")}
             checked={checked.car}
-            w={160}
+            w={150}
             h={180}
             wid={200}
             heig={200}
@@ -57,7 +57,7 @@ const ChoixVehiculeB = () => {
           <Vehicule
             text={require("../assets/electric.png")}
             checked={checked.bike}
-            w={160}
+            w={150}
             h={180}
             wid={170}
             heig={170}
@@ -76,7 +76,7 @@ const ChoixVehiculeB = () => {
           <Vehicule
             text={require("../assets/Truckred.png")}
             checked={checked.truck}
-            w={160}
+            w={150}
             h={180}
             wid={140}
             heig={140}
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 20,
+    gap: 10,
     marginTop: 10,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 150,
+    paddingTop: 165,
   },
 });
 

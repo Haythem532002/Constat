@@ -33,7 +33,7 @@ const CroquisSeul = () => {
     <Screen>
       <DynamicHeader screen="ChoixCroquisSeul" num={4} />
       <Title text="Dessiner le Croquis" />
-      <View style={{ width: 380, height: 360, borderWidth: 1 }}>
+      <View style={{ width: 335, height: 360, borderWidth: 1 }}>
         <Signature
           ref={ref}
           onOK={handleOK}

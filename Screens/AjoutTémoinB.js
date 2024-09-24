@@ -34,11 +34,11 @@ const AjoutTémoinB = () => {
       <Label text="Nom et Prénom" required={true} />
       <Input value={fullName} onChangeText={(text) => setFullName(text)} />
       <Label text="Numéro de téléphone" required={true} />
-      <Input value={num} onChangeText={(num) => setNum(num)} />
+      <Input value={num} type="numeric" onChangeText={(num) => setNum(num)} />
       <Label text="Adresse" required={true} />
       <Input value={adresse} onChangeText={(adresse) => setAdresse(adresse)} />
       <Label text="Code Postal" />
-      <Input value={code} onChangeText={(cod) => setCode(cod)} />
+      <Input value={code} type="numeric" onChangeText={(cod) => setCode(cod)} />
       <Label text="Ville" />
       <Input value={ville} onChangeText={(v) => setVille(v)} />
       <View style={styles.buttonContainer}>

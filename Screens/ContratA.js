@@ -93,8 +93,8 @@ const ContratA = () => {
           <Input value={adrC} onChangeText={(ac) => setAdrC(ac)} />
         </View>
       )}
-      <Label text="Permis de conduire" required={true} />
-      <Input value={permis} onChangeText={(p) => setPermis(p)} />
+      <Label text="Permis de conduire N°" required={true} />
+      <Input value={permis} type="numeric" onChangeText={(p) => setPermis(p)} />
       <Label text="E-mail" required={true} />
       <Input value={email} onChangeText={(e) => setEmail(e)} />
       <View style={styles.buttonContainer}>

@@ -283,7 +283,7 @@ const ChoqB = () => {
         <Image
           source={require("../assets/GrayCar2.png")}
           style={{
-            width: 300,
+            width: 280,
             height: 100,
             position: "absolute",
             marginLeft: 30,

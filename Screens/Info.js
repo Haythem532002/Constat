@@ -14,7 +14,7 @@ const Info = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { vehicule } = useSelector((state) => state.info);
-  const supp = (vehicule,index) => {
+  const supp = (vehicule, index) => {
     let j = 0;
     let temp = [];
     for (let i = 0; i < vehicule.length; i++) {
@@ -29,7 +29,7 @@ const Info = () => {
     <Screen>
       <Header screen="Menu" />
       <Title text="Mes Inforamtions personelles" />
-      <Text style={[styles.textColor, { marginVertical: 10 }]}>
+      <Text style={[styles.textColor]}>
         Vous pouvez mémoriser vos véhicules ici
       </Text>
       {vehicule.length > 0 &&
@@ -42,7 +42,7 @@ const Info = () => {
             <View style={{ flexDirection: "row" }}>
               <Pressable
                 onPress={() => {
-                  let temp = supp(vehicule,index);
+                  let temp = supp(vehicule, index);
                   dispatch(modifie(temp));
                 }}
                 style={{ marginLeft: 20 }}
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 380,
+    marginTop: 390,
     marginBottom: 30,
   },
 });

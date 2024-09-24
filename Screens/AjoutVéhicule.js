@@ -107,7 +107,11 @@ const AjoutVéhicule = () => {
           type="numeric"
         />
         <Label text="Agence" required={true} />
-        <Input value={agence} onChangeText={(a) => setAgence(a)} />
+        <Input
+          value={agence}
+          type="numeric"
+          onChangeText={(a) => setAgence(a)}
+        />
         <Text style={styles.titre}>
           Saisissez les informations du véhicule :
         </Text>

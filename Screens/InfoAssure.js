@@ -26,7 +26,7 @@ const InfoAssure = () => {
     <Screen>
       <Header screen="Info" />
       <Title text="Mes Inforamtions personelles" />
-      <Text style={[styles.textColor, { marginVertical: 10 }]}>
+      <Text style={[styles.textColor]}>
         Vous pouvez mémoriser les infiramtions de l'assuré
       </Text>
       <Label text="Nom de l'assuré" required={true} />
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 120,
+    marginTop: 150,
   },
 });
 

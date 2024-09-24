@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Picker } from "react-native";
 import Screen from "./Screen";
 import DynamicHeader from "../Components/DynamicHeader";
 import Title from "../Components/Title";
@@ -9,6 +9,9 @@ import { useNavigation } from "@react-navigation/native";
 import VehiculeIndication from "../Components/VehiculeIndication";
 import Label from "../Components/Label";
 import Input from "../Components/Input";
+import { Dropdown } from "react-native-element-dropdown";
+import RNPickerSelect from "react-native-picker-select";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAgenceAssurA,
@@ -45,6 +48,15 @@ const InfoAssuranceA = () => {
         <VehiculeIndication letter="A" />
         <Titre text="Société d'Assurances" />
         <Label text="Vehicule assuré par" required={true} />
+        {/* <RNPickerSelect
+          onValueChange={(value) => console.log(value)}
+          placeholder={{}}
+          items={[
+            { label: "GAT Assurance", value: "football" },
+            { label: "AMI Assurance", value: "baseball" },
+            { label: "Lloyd Assurance", value: "hockey" },
+          ]}
+        /> */}
         <Input value={assurance} onChangeText={(a) => setAssurance(a)} />
         <Label text="Police d'Assurance N°" required={true} />
         <Input
@@ -53,7 +65,11 @@ const InfoAssuranceA = () => {
           type="numeric"
         />
         <Label text="Agence" required={true} />
-        <Input value={agence} onChangeText={(a) => setAgence(a)} />
+        <Input
+          value={agence}
+          type="numeric"
+          onChangeText={(a) => setAgence(a)}
+        />
         <View style={{ marginVertical: 10 }}></View>
         <Titre text="Identité de Véhicule" />
         <Label text="Immatriculation" required={true} />

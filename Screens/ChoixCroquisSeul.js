@@ -64,7 +64,7 @@ const ChoixCroquisSeul = () => {
           <Croquis
             text={require("../assets/Pencil.png")}
             checked={checked.croquis}
-            w={160}
+            w={150}
             h={250}
             desc="Dessiner le Croquis sur le Smartphone"
           />
@@ -82,7 +82,7 @@ const ChoixCroquisSeul = () => {
           <Croquis
             text={require("../assets/Camera.png")}
             checked={checked.photo}
-            w={160}
+            w={150}
             h={250}
             desc="Photographier le Croquis ( Préalablement dessiné sur une feuille)"
           />
@@ -100,7 +100,7 @@ const ChoixCroquisSeul = () => {
           <Croquis
             text={require("../assets/Prohibit.png")}
             checked={checked.nonCroquis}
-            w={160}
+            w={150}
             h={250}
             desc="Ne pas faire de croquis"
           />
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 20,
+    gap: 10,
   },
   buttonContainer: {
     flexDirection: "row",

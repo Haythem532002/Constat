@@ -30,30 +30,9 @@ const AccidentSeul = () => {
   const [codePostal, setCodePostal] = useState(codePostalS);
   const [ville, setVille] = useState(villeS);
 
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-
-  let text = "Waiting..";
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
   return (
     <Screen>
-      <DynamicHeader screen="Circonstance" num={3} />
+      <DynamicHeader screen="CirconstanceSeul" num={3} />
       <Title text="Indiquer la date, l'heure et le lieu de l'accident" />
       <Label text="Date" required={true} />
       <Input value={date} style={{ fontSize: 22 }} editable={false} />

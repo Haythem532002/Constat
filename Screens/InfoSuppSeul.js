@@ -54,24 +54,6 @@ const InfoSuppSeul = () => {
       <Pressable onPress={takePhoto} style={styles.buttonStyle}>
         <Text style={styles.text}>Prendre une photo</Text>
       </Pressable>
-      <View
-        style={{
-          alignItems: "center",
-          flexDirection: "row",
-          marginTop: 10,
-          flexWrap: "wrap",
-        }}
-      >
-        <Switch
-          trackColor={{ false: "#767577", true: "#ffffff" }}
-          thumbColor={degat ? "red" : "#f4f3f4"}
-          onValueChange={toggleSwitch}
-          value={degat}
-        />
-        <Text style={{ color: "#ffffff", fontSize: 16 }}>
-          Dégat(s) matériel(s) autre(s) qu'aux véhicule
-        </Text>
-      </View>
       {images.length > 0 && (
         <View style={styles.imageContainer}>
           {images.map((ele) => (
@@ -102,7 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    paddingTop: 260,
+    paddingTop: 330,
     marginBottom: 35,
   },
   imageContainer: {
