@@ -15,7 +15,6 @@ A modern React Native mobile application for streamlined insurance claim reporti
 - ✍️ **Digital Signatures** - Collect signatures from all parties
 - 🚗 **Vehicle Management** - Track multiple vehicles and insurance details
 - 📊 **Report Generation** - Generate comprehensive PDF reports
-- 🔐 **Secure Authentication** - JWT-based user authentication
 
 ## 🛠️ Tech Stack
 
