@@ -25,17 +25,37 @@ A modern React Native mobile application for streamlined insurance claim reporti
 ## 📱 App Screenshots
 
 <div align="center">
-  <img src="./e-constat/Capture d'écran 2025-09-30 093538.png" width="200" alt="Login Screen"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093544.png" width="200" alt="Dashboard"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093554.png" width="200" alt="Claim Form"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093611.png" width="200" alt="Vehicle Details"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093538.png" width="200" alt="App Screen 1"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093544.png" width="200" alt="App Screen 2"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093554.png" width="200" alt="App Screen 3"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093611.png" width="200" alt="App Screen 4"/>
 </div>
 
 <div align="center">
-  <img src="./e-constat/Capture d'écran 2025-09-30 093621.png" width="200" alt="Incident Documentation"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093723.png" width="200" alt="Photo Capture"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093746.png" width="200" alt="Signature Pad"/>
-  <img src="./e-constat/Capture d'écran 2025-09-30 093753.png" width="200" alt="Report Summary"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093621.png" width="200" alt="App Screen 5"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093723.png" width="200" alt="App Screen 6"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093746.png" width="200" alt="App Screen 7"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093753.png" width="200" alt="App Screen 8"/>
+</div>
+
+<div align="center">
+  <img src="./e-constat/Capture d'écran 2025-09-30 093804.png" width="200" alt="App Screen 9"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093822.png" width="200" alt="App Screen 10"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093831.png" width="200" alt="App Screen 11"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093845.png" width="200" alt="App Screen 12"/>
+</div>
+
+<div align="center">
+  <img src="./e-constat/Capture d'écran 2025-09-30 093900.png" width="200" alt="App Screen 13"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093915.png" width="200" alt="App Screen 14"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093928.png" width="200" alt="App Screen 15"/>
+  <img src="./e-constat/Capture d'écran 2025-09-30 093943.png" width="200" alt="App Screen 16"/>
+</div>
+
+## 🏗️ App Architecture
+
+<div align="center">
+  <img src="./e-constat/diagramme.png" width="600" alt="App Architecture Diagram"/>
 </div>
 
 ## 🚀 Quick Start
